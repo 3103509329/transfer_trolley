@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.mapAndVideo.NetcarThirdPartyMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.mapAndVideo.NetcarThirdParty">
+    <id column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="account_pwd" jdbcType="VARCHAR" property="accountPwd" />
+    <result column="key_type" jdbcType="CHAR" property="keyType" />
+    <result column="create" jdbcType="VARCHAR" property="create" />
+    <result column="update" jdbcType="VARCHAR" property="update" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uuid, company_id, identifier, company_name, account_name, account_pwd, key_type, 
+    create, update, create_time, update_time, path
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_third_party
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from netcar_third_party
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.mapAndVideo.NetcarThirdParty">
+    insert into netcar_third_party (uuid, company_id, identifier, 
+      company_name, account_name, account_pwd, 
+      key_type, create, update, 
+      create_time, update_time, path
+      )
+    values (#{uuid,jdbcType=BIGINT}, #{companyId,jdbcType=VARCHAR}, #{identifier,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{accountPwd,jdbcType=VARCHAR}, 
+      #{keyType,jdbcType=CHAR}, #{create,jdbcType=VARCHAR}, #{update,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{path,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.mapAndVideo.NetcarThirdParty">
+    insert into netcar_third_party
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="accountPwd != null">
+        account_pwd,
+      </if>
+      <if test="keyType != null">
+        key_type,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="update != null">
+        update,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPwd != null">
+        #{accountPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="keyType != null">
+        #{keyType,jdbcType=CHAR},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=VARCHAR},
+      </if>
+      <if test="update != null">
+        #{update,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.mapAndVideo.NetcarThirdParty">
+    update netcar_third_party
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPwd != null">
+        account_pwd = #{accountPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="keyType != null">
+        key_type = #{keyType,jdbcType=CHAR},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=VARCHAR},
+      </if>
+      <if test="update != null">
+        update = #{update,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.mapAndVideo.NetcarThirdParty">
+    update netcar_third_party
+    set company_id = #{companyId,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account_pwd = #{accountPwd,jdbcType=VARCHAR},
+      key_type = #{keyType,jdbcType=CHAR},
+      create = #{create,jdbcType=VARCHAR},
+      update = #{update,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      path = #{path,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByCompanyId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from netcar_third_party
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </select>
+</mapper>

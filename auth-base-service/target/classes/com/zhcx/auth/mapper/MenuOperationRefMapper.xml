@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.MenuOperationRefMapper" >
+  <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.MenuOperationRef" >
+    <constructor >
+      <idArg column="UUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FACILITY_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="APP_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MENU_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, FACILITY_ID, APP_ID, MENU_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu_operation_ref
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_menu_operation_ref
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.auth.pojo.MenuOperationRef" >
+    insert into t_menu_operation_ref (UUID, FACILITY_ID, APP_ID, 
+      MENU_ID)
+    values (#{uuid,jdbcType=VARCHAR}, #{facilityId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{menuId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.auth.pojo.MenuOperationRef" >
+    insert into t_menu_operation_ref
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="facilityId != null" >
+        FACILITY_ID,
+      </if>
+      <if test="appId != null" >
+        APP_ID,
+      </if>
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityId != null" >
+        #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.auth.pojo.MenuOperationRef" >
+    update t_menu_operation_ref
+    <set >
+      <if test="facilityId != null" >
+        FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        MENU_ID = #{menuId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.auth.pojo.MenuOperationRef" >
+    update t_menu_operation_ref
+    set FACILITY_ID = #{facilityId,jdbcType=VARCHAR},
+      APP_ID = #{appId,jdbcType=VARCHAR},
+      MENU_ID = #{menuId,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

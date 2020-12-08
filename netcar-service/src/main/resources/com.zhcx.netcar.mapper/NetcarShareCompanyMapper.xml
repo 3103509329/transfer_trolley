@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarShareCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarShareCompany">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="contact_address" jdbcType="VARCHAR" property="contactAddress" />
+    <result column="economic_type" jdbcType="VARCHAR" property="economicType" />
+    <result column="legal_name" jdbcType="VARCHAR" property="legalName" />
+    <result column="legal_phone" jdbcType="VARCHAR" property="legalPhone" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, company_name, identifier, address, contact_address, economic_type, legal_name, 
+    legal_phone, state, flag, update_time, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_share_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from netcar_share_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarShareCompany">
+    insert into netcar_share_company (company_id, company_name, identifier, 
+      address, contact_address, economic_type, 
+      legal_name, legal_phone, state, 
+      flag, update_time, reserved
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{identifier,jdbcType=VARCHAR}, 
+      #{address,jdbcType=INTEGER}, #{contactAddress,jdbcType=VARCHAR}, #{economicType,jdbcType=VARCHAR}, 
+      #{legalName,jdbcType=VARCHAR}, #{legalPhone,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{flag,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, #{reserved,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarShareCompany">
+    insert into netcar_share_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="contactAddress != null">
+        contact_address,
+      </if>
+      <if test="economicType != null">
+        economic_type,
+      </if>
+      <if test="legalName != null">
+        legal_name,
+      </if>
+      <if test="legalPhone != null">
+        legal_phone,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="contactAddress != null">
+        #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="economicType != null">
+        #{economicType,jdbcType=VARCHAR},
+      </if>
+      <if test="legalName != null">
+        #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPhone != null">
+        #{legalPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarShareCompany">
+    update netcar_share_company
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="contactAddress != null">
+        contact_address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="economicType != null">
+        economic_type = #{economicType,jdbcType=VARCHAR},
+      </if>
+      <if test="legalName != null">
+        legal_name = #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPhone != null">
+        legal_phone = #{legalPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarShareCompany">
+    update netcar_share_company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      address = #{address,jdbcType=INTEGER},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      economic_type = #{economicType,jdbcType=VARCHAR},
+      legal_name = #{legalName,jdbcType=VARCHAR},
+      legal_phone = #{legalPhone,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
+
+
+
+    <select id="queryShareCompanyList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from netcar_share_company
+        <where>
+            <if test=" companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="identifier != null">
+                and identifier like concat('%',#{identifier},'%')
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="CompanyNameMap" type="com.zhcx.netcar.vo.CompanyNameVo">
+        <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    </resultMap>
+    <select id="queryShareCompanyNameList" parameterType="map" resultMap="CompanyNameMap">
+        select
+        company_id,
+        company_name
+        from netcar_share_company
+        <where>
+            <if test=" companyId != null">
+                and company_id = #{companyId}
+            </if>
+        </where>
+    </select>
+</mapper>

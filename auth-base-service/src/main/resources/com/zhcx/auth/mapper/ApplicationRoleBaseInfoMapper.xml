@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.auth.mapper.ApplicationRoleBaseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+        <constructor>
+            <idArg column="uuid" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="application_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="creator" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="creator_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="modifier_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="modifier" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    uuid, role_id, application_code, status, creator, creator_time, modifier_time, modifier
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_application_role
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_auth_application_role
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+    insert into t_auth_application_role (uuid, role_id, application_code, 
+      status, creator, creator_time, 
+      modifier_time, modifier)
+    values (#{uuid,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{applicationCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{creatorTime,jdbcType=TIMESTAMP}, 
+      #{modifierTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+        insert into t_auth_application_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="applicationCode != null">
+                application_code,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="creatorTime != null">
+                creator_time,
+            </if>
+            <if test="modifierTime != null">
+                modifier_time,
+            </if>
+            <if test="modifier != null">
+                modifier,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationCode != null">
+                #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=BIGINT},
+            </if>
+            <if test="creatorTime != null">
+                #{creatorTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifierTime != null">
+                #{modifierTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifier != null">
+                #{modifier,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+        update t_auth_application_role
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationCode != null">
+                application_code = #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=BIGINT},
+            </if>
+            <if test="creatorTime != null">
+                creator_time = #{creatorTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifierTime != null">
+                modifier_time = #{modifierTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifier != null">
+                modifier = #{modifier,jdbcType=BIGINT},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+    update t_auth_application_role
+    set role_id = #{roleId,jdbcType=BIGINT},
+      application_code = #{applicationCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
+      creator_time = #{creatorTime,jdbcType=TIMESTAMP},
+      modifier_time = #{modifierTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=BIGINT}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+    <select id="select" resultMap="BaseResultMap" parameterType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_application_role
+        <where>
+            <if test="roleId != null">
+                and = #{roleId,jdbcType=BIGINT}
+            </if>
+            <if test="name != null and name !=''">
+                and application_code = #{applicationCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <delete id="delete" parameterType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO">
+        delete from t_auth_application_role
+        <where>
+            <if test="applicationCode != null and applicationCode !=''">
+                application_code = #{applicationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="roleList != null and roleList.size != 0">
+                and role_id in
+                <foreach collection="roleList" index="index" item="item"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+
+
+    </delete>
+    <select id="selectBycode" resultMap="BaseResultMap" parameterType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO">
+        select
+        <include refid="Base_Column_List"/>
+        form t_auth_application_role
+        <where>
+            <if test="codeList != null and codeList.size > 0">
+                and application_code in
+                <foreach collection="codeList" index="index" item="item"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="roleList != null and roleList.size != 0">
+                and role_id in
+                <foreach collection="roleList" index="index" item="item"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into t_auth_application_role (uuid, role_id, application_code,
+        status, creator, creator_time,
+        modifier_time, modifier)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.uuid}, #{item.roleId}, #{item.applicationCode},
+            #{item.status}, #{item.creator}, #{item.creatorTime},
+            #{item.modifierTime}, #{item.modifier})
+        </foreach>
+    </insert>
+    <select id="selectByUser" resultType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO">
+        select
+        a.code as applicationCode,
+        a.name as applicationName,
+        r.uuid as roleId,
+        r.role_name as roleName
+        FROM
+        t_auth_application as a
+        left JOIN t_auth_role as r on r.application_code = a.code
+        left join t_auth_user_role as u on u.role_id = r.uuid
+        <where>
+            r.status =1
+            and
+            a.status = 1
+            <if test="userId != null">
+                and u.user_id = #{userId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+</mapper>

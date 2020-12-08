@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.yunzheng.YunZhengVehicleMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+        <id column="branum" jdbcType="VARCHAR" property="branum"/>
+        <result column="factype" jdbcType="VARCHAR" property="factype"/>
+        <result column="model" jdbcType="VARCHAR" property="model"/>
+        <result column="bracolor" jdbcType="VARCHAR" property="bracolor"/>
+        <result column="engnum" jdbcType="VARCHAR" property="engnum"/>
+        <result column="franum" jdbcType="VARCHAR" property="franum"/>
+        <result column="owner_name" jdbcType="VARCHAR" property="ownerName"/>
+        <result column="driver_num" jdbcType="VARCHAR" property="driverNum"/>
+        <result column="registrationdate" jdbcType="VARCHAR" property="registrationdate"/>
+        <result column="lssuingdate" jdbcType="VARCHAR" property="lssuingdate"/>
+        <result column="traword" jdbcType="VARCHAR" property="traword"/>
+        <result column="trano" jdbcType="VARCHAR" property="trano"/>
+        <result column="gradepcode" jdbcType="VARCHAR" property="gradepcode"/>
+        <result column="gradate" jdbcType="VARCHAR" property="gradate"/>
+        <result column="stadate" jdbcType="VARCHAR" property="stadate"/>
+        <result column="enddate" jdbcType="VARCHAR" property="enddate"/>
+        <result column="eldtype" jdbcType="VARCHAR" property="eldtype"/>
+        <result column="veclength" jdbcType="VARCHAR" property="veclength"/>
+        <result column="vecwide" jdbcType="VARCHAR" property="vecwide"/>
+        <result column="vechigh" jdbcType="VARCHAR" property="vechigh"/>
+        <result column="totalmass" jdbcType="VARCHAR" property="totalmass"/>
+        <result column="bustype" jdbcType="VARCHAR" property="bustype"/>
+        <result column="bnscope" jdbcType="VARCHAR" property="bnscope"/>
+        <result column="vectype" jdbcType="VARCHAR" property="vectype"/>
+        <result column="cheseats" jdbcType="VARCHAR" property="cheseats"/>
+        <result column="veccolor" jdbcType="VARCHAR" property="veccolor"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="flage" jdbcType="INTEGER" property="flage"/>
+        <result column="busiRegNumber" jdbcType="VARCHAR" property="busiregnumber"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    branum, factype, model, bracolor, engnum, franum, owner_name, driver_num, registrationdate,
+    lssuingdate, traword, trano, gradepcode, gradate, stadate, enddate, eldtype, veclength,
+    vecwide, vechigh, totalmass, bustype, bnscope, vectype, cheseats, veccolor, time,
+    flage, busiRegNumber
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yunzheng_base_info_vehicle
+        where branum = #{branum,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yunzheng_base_info_vehicle
+    where branum = #{branum,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+    insert into yunzheng_base_info_vehicle (branum, factype, model,
+      bracolor, engnum, franum,
+      owner_name, driver_num, registrationdate,
+      lssuingdate, traword, trano,
+      gradepcode, gradate, stadate,
+      enddate, eldtype, veclength,
+      vecwide, vechigh, totalmass,
+      bustype, bnscope, vectype,
+      cheseats, veccolor, time,
+      flage, busiRegNumber)
+    values (#{branum,jdbcType=VARCHAR}, #{factype,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR},
+      #{bracolor,jdbcType=VARCHAR}, #{engnum,jdbcType=VARCHAR}, #{franum,jdbcType=VARCHAR},
+      #{ownerName,jdbcType=VARCHAR}, #{driverNum,jdbcType=VARCHAR}, #{registrationdate,jdbcType=VARCHAR},
+      #{lssuingdate,jdbcType=VARCHAR}, #{traword,jdbcType=VARCHAR}, #{trano,jdbcType=VARCHAR},
+      #{gradepcode,jdbcType=VARCHAR}, #{gradate,jdbcType=VARCHAR}, #{stadate,jdbcType=VARCHAR},
+      #{enddate,jdbcType=VARCHAR}, #{eldtype,jdbcType=VARCHAR}, #{veclength,jdbcType=VARCHAR},
+      #{vecwide,jdbcType=VARCHAR}, #{vechigh,jdbcType=VARCHAR}, #{totalmass,jdbcType=VARCHAR},
+      #{bustype,jdbcType=VARCHAR}, #{bnscope,jdbcType=VARCHAR}, #{vectype,jdbcType=VARCHAR},
+      #{cheseats,jdbcType=VARCHAR}, #{veccolor,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR},
+      #{flage,jdbcType=INTEGER}, #{busiregnumber,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+        insert into yunzheng_base_info_vehicle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="branum != null">
+                branum,
+            </if>
+            <if test="factype != null">
+                factype,
+            </if>
+            <if test="model != null">
+                model,
+            </if>
+            <if test="bracolor != null">
+                bracolor,
+            </if>
+            <if test="engnum != null">
+                engnum,
+            </if>
+            <if test="franum != null">
+                franum,
+            </if>
+            <if test="ownerName != null">
+                owner_name,
+            </if>
+            <if test="driverNum != null">
+                driver_num,
+            </if>
+            <if test="registrationdate != null">
+                registrationdate,
+            </if>
+            <if test="lssuingdate != null">
+                lssuingdate,
+            </if>
+            <if test="traword != null">
+                traword,
+            </if>
+            <if test="trano != null">
+                trano,
+            </if>
+            <if test="gradepcode != null">
+                gradepcode,
+            </if>
+            <if test="gradate != null">
+                gradate,
+            </if>
+            <if test="stadate != null">
+                stadate,
+            </if>
+            <if test="enddate != null">
+                enddate,
+            </if>
+            <if test="eldtype != null">
+                eldtype,
+            </if>
+            <if test="veclength != null">
+                veclength,
+            </if>
+            <if test="vecwide != null">
+                vecwide,
+            </if>
+            <if test="vechigh != null">
+                vechigh,
+            </if>
+            <if test="totalmass != null">
+                totalmass,
+            </if>
+            <if test="bustype != null">
+                bustype,
+            </if>
+            <if test="bnscope != null">
+                bnscope,
+            </if>
+            <if test="vectype != null">
+                vectype,
+            </if>
+            <if test="cheseats != null">
+                cheseats,
+            </if>
+            <if test="veccolor != null">
+                veccolor,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="flage != null">
+                flage,
+            </if>
+            <if test="busiregnumber != null">
+                busiRegNumber,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="branum != null">
+                #{branum,jdbcType=VARCHAR},
+            </if>
+            <if test="factype != null">
+                #{factype,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                #{model,jdbcType=VARCHAR},
+            </if>
+            <if test="bracolor != null">
+                #{bracolor,jdbcType=VARCHAR},
+            </if>
+            <if test="engnum != null">
+                #{engnum,jdbcType=VARCHAR},
+            </if>
+            <if test="franum != null">
+                #{franum,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerName != null">
+                #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="driverNum != null">
+                #{driverNum,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationdate != null">
+                #{registrationdate,jdbcType=VARCHAR},
+            </if>
+            <if test="lssuingdate != null">
+                #{lssuingdate,jdbcType=VARCHAR},
+            </if>
+            <if test="traword != null">
+                #{traword,jdbcType=VARCHAR},
+            </if>
+            <if test="trano != null">
+                #{trano,jdbcType=VARCHAR},
+            </if>
+            <if test="gradepcode != null">
+                #{gradepcode,jdbcType=VARCHAR},
+            </if>
+            <if test="gradate != null">
+                #{gradate,jdbcType=VARCHAR},
+            </if>
+            <if test="stadate != null">
+                #{stadate,jdbcType=VARCHAR},
+            </if>
+            <if test="enddate != null">
+                #{enddate,jdbcType=VARCHAR},
+            </if>
+            <if test="eldtype != null">
+                #{eldtype,jdbcType=VARCHAR},
+            </if>
+            <if test="veclength != null">
+                #{veclength,jdbcType=VARCHAR},
+            </if>
+            <if test="vecwide != null">
+                #{vecwide,jdbcType=VARCHAR},
+            </if>
+            <if test="vechigh != null">
+                #{vechigh,jdbcType=VARCHAR},
+            </if>
+            <if test="totalmass != null">
+                #{totalmass,jdbcType=VARCHAR},
+            </if>
+            <if test="bustype != null">
+                #{bustype,jdbcType=VARCHAR},
+            </if>
+            <if test="bnscope != null">
+                #{bnscope,jdbcType=VARCHAR},
+            </if>
+            <if test="vectype != null">
+                #{vectype,jdbcType=VARCHAR},
+            </if>
+            <if test="cheseats != null">
+                #{cheseats,jdbcType=VARCHAR},
+            </if>
+            <if test="veccolor != null">
+                #{veccolor,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="flage != null">
+                #{flage,jdbcType=INTEGER},
+            </if>
+            <if test="busiregnumber != null">
+                #{busiregnumber,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectCountByCompanyId" parameterType="map" resultType="long">
+        SELECT
+        count(1)
+        FROM
+        t_base_info_vehiclelicence t1
+        <where>
+            <!--            t1.source = 4-->
+            <!--            and-->
+            t1.vehicle_type = 4
+            <if test="busiregnumber">
+                and t1.company_id = #{busiregnumber}
+            </if>
+            and t1.company_id != ''
+        </where>
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+        update yunzheng_base_info_vehicle
+        <set>
+            <if test="factype != null">
+                factype = #{factype,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                model = #{model,jdbcType=VARCHAR},
+            </if>
+            <if test="bracolor != null">
+                bracolor = #{bracolor,jdbcType=VARCHAR},
+            </if>
+            <if test="engnum != null">
+                engnum = #{engnum,jdbcType=VARCHAR},
+            </if>
+            <if test="franum != null">
+                franum = #{franum,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerName != null">
+                owner_name = #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="driverNum != null">
+                driver_num = #{driverNum,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationdate != null">
+                registrationdate = #{registrationdate,jdbcType=VARCHAR},
+            </if>
+            <if test="lssuingdate != null">
+                lssuingdate = #{lssuingdate,jdbcType=VARCHAR},
+            </if>
+            <if test="traword != null">
+                traword = #{traword,jdbcType=VARCHAR},
+            </if>
+            <if test="trano != null">
+                trano = #{trano,jdbcType=VARCHAR},
+            </if>
+            <if test="gradepcode != null">
+                gradepcode = #{gradepcode,jdbcType=VARCHAR},
+            </if>
+            <if test="gradate != null">
+                gradate = #{gradate,jdbcType=VARCHAR},
+            </if>
+            <if test="stadate != null">
+                stadate = #{stadate,jdbcType=VARCHAR},
+            </if>
+            <if test="enddate != null">
+                enddate = #{enddate,jdbcType=VARCHAR},
+            </if>
+            <if test="eldtype != null">
+                eldtype = #{eldtype,jdbcType=VARCHAR},
+            </if>
+            <if test="veclength != null">
+                veclength = #{veclength,jdbcType=VARCHAR},
+            </if>
+            <if test="vecwide != null">
+                vecwide = #{vecwide,jdbcType=VARCHAR},
+            </if>
+            <if test="vechigh != null">
+                vechigh = #{vechigh,jdbcType=VARCHAR},
+            </if>
+            <if test="totalmass != null">
+                totalmass = #{totalmass,jdbcType=VARCHAR},
+            </if>
+            <if test="bustype != null">
+                bustype = #{bustype,jdbcType=VARCHAR},
+            </if>
+            <if test="bnscope != null">
+                bnscope = #{bnscope,jdbcType=VARCHAR},
+            </if>
+            <if test="vectype != null">
+                vectype = #{vectype,jdbcType=VARCHAR},
+            </if>
+            <if test="cheseats != null">
+                cheseats = #{cheseats,jdbcType=VARCHAR},
+            </if>
+            <if test="veccolor != null">
+                veccolor = #{veccolor,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="flage != null">
+                flage = #{flage,jdbcType=INTEGER},
+            </if>
+            <if test="busiregnumber != null">
+                busiRegNumber = #{busiregnumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where branum = #{branum,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+    update yunzheng_base_info_vehicle
+    set factype = #{factype,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      bracolor = #{bracolor,jdbcType=VARCHAR},
+      engnum = #{engnum,jdbcType=VARCHAR},
+      franum = #{franum,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      driver_num = #{driverNum,jdbcType=VARCHAR},
+      registrationdate = #{registrationdate,jdbcType=VARCHAR},
+      lssuingdate = #{lssuingdate,jdbcType=VARCHAR},
+      traword = #{traword,jdbcType=VARCHAR},
+      trano = #{trano,jdbcType=VARCHAR},
+      gradepcode = #{gradepcode,jdbcType=VARCHAR},
+      gradate = #{gradate,jdbcType=VARCHAR},
+      stadate = #{stadate,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=VARCHAR},
+      eldtype = #{eldtype,jdbcType=VARCHAR},
+      veclength = #{veclength,jdbcType=VARCHAR},
+      vecwide = #{vecwide,jdbcType=VARCHAR},
+      vechigh = #{vechigh,jdbcType=VARCHAR},
+      totalmass = #{totalmass,jdbcType=VARCHAR},
+      bustype = #{bustype,jdbcType=VARCHAR},
+      bnscope = #{bnscope,jdbcType=VARCHAR},
+      vectype = #{vectype,jdbcType=VARCHAR},
+      cheseats = #{cheseats,jdbcType=VARCHAR},
+      veccolor = #{veccolor,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      flage = #{flage,jdbcType=INTEGER},
+      busiRegNumber = #{busiregnumber,jdbcType=VARCHAR}
+    where branum = #{branum,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectListByCompanyId" parameterType="map" resultMap="BaseResultMap">
+        select
+        car_num as branum
+        from
+        t_base_info_vehiclelicence
+        <where>
+            <!--            source = 4-->
+            <!--            and-->
+            vehicle_type = 4
+            <if test="companyId != null and companyId != ''">
+                and company_id = #{companyId}
+            </if>
+            <if test="vehicleNo != null and vehicleNo != ''">
+                and
+                car_num = #{vehicleNo}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="BaseResultMapExtend" extends="BaseResultMap" type="com.zhcx.netcar.pojo.yuzheng.YunZhengVehicle">
+        <result column="clitname" jdbcType="VARCHAR" property="clitname"/>
+        <result column="companyName" jdbcType="VARCHAR" property="companyName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="people" jdbcType="VARCHAR" property="people"/>
+        <result column="carbodyColor" jdbcType="VARCHAR" property="carbodyColor"/>
+        <result column="driverNum" jdbcType="VARCHAR" property="driverNum"/>
+
+    </resultMap>
+    <select id="selectListByVehicleNo" resultMap="BaseResultMapExtend" parameterType="java.lang.String">
+        select
+        t1.car_num AS branum,
+        t1.car_brand AS factype,
+        t1.car_model AS model,
+        t1.plate_number_colour AS bracolor,
+        t1.ein AS engnum,
+        t1.vin AS franum,
+        t1.poss_name AS owner_name,
+        t1.car_enter_date AS registrationdate,
+        t1.road_transport_reference AS traword,
+        t1.road_transport_code AS trano,
+        t1.issuing_company AS gradepcode,
+        t1.first_allotment_date AS gradate,
+        t1.rodetransport_start AS stadate,
+        t1.rodetransport_end AS enddate,
+        t1.fuel_type AS eldtype,
+        t1.car_size_long AS veclength,
+        t1.car_size_wide AS vecwide,
+        t1.car_size_high AS vechigh,
+        t1.all_weight AS totalmass,
+        t1.vehicle_type AS vectype,
+        t1.check_person as cheseats,
+        t1.car_color AS veccolor,
+        t1.car_native_place AS address,
+        t1.poss_name as people,
+        t1.car_color as carbodyColor,
+        t1.vehiclecert_img as driverNum,
+        t2.company_name AS companyName
+        from t_base_info_vehiclelicence t1
+        LEFT JOIN t_base_info_company t2 ON t1.company_id = t2.company_id
+        <where>
+            t1.vehicle_type = 4
+            <if test="busiRegNumber != null and busiRegNumber != ''">
+                t2.identifier =#{busiRegNumber}
+            </if>
+            <if test="vehicleNo != null">
+                and car_num LIKE CONCAT('%', #{vehicleNo}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectVehicleNo" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT
+        car_num as branum
+        FROM
+        t_base_info_vehiclelicence
+        WHERE
+        status = 1
+        AND corp_id IN (
+        SELECT
+        corp_id
+        FROM
+        t_base_info_company
+        WHERE
+        company_id IN
+        <foreach item="item" index="index" collection="vehicleNoList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        )
+    </select>
+
+</mapper>

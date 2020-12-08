@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarBaseInfoCompanyMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany">
+        <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <id column="address" jdbcType="INTEGER" property="address" />
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+        <result column="business_scope" jdbcType="VARCHAR" property="businessScope" />
+        <result column="contact_address" jdbcType="VARCHAR" property="contactAddress" />
+        <result column="economic_type" jdbcType="VARCHAR" property="economicType" />
+        <result column="reg_capital" jdbcType="VARCHAR" property="regCapital" />
+        <result column="legal_name" jdbcType="VARCHAR" property="legalName" />
+        <result column="legal_id" jdbcType="VARCHAR" property="legalId" />
+        <result column="legal_phone" jdbcType="VARCHAR" property="legalPhone" />
+        <result column="legal_photo" jdbcType="VARCHAR" property="legalPhoto" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="flag" jdbcType="INTEGER" property="flag" />
+        <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    company_id, address, update_time, company_name, identifier, business_scope, contact_address,
+    economic_type, reg_capital, legal_name, legal_id, legal_phone, legal_photo, state,
+    flag, reserved
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from netcar_base_info_company
+        where company_id = #{companyId,jdbcType=VARCHAR}
+        and address = #{address,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_base_info_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and address = #{address,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany">
+    insert into netcar_base_info_company (company_id, address, update_time,
+      company_name, identifier, business_scope,
+      contact_address, economic_type, reg_capital,
+      legal_name, legal_id, legal_phone,
+      legal_photo, state, flag,
+      reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{address,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR},
+      #{companyName,jdbcType=VARCHAR}, #{identifier,jdbcType=VARCHAR}, #{businessScope,jdbcType=VARCHAR},
+      #{contactAddress,jdbcType=VARCHAR}, #{economicType,jdbcType=VARCHAR}, #{regCapital,jdbcType=VARCHAR},
+      #{legalName,jdbcType=VARCHAR}, #{legalId,jdbcType=VARCHAR}, #{legalPhone,jdbcType=VARCHAR},
+      #{legalPhoto,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER},
+      #{reserved,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany">
+        insert into netcar_base_info_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="identifier != null">
+                identifier,
+            </if>
+            <if test="businessScope != null">
+                business_scope,
+            </if>
+            <if test="contactAddress != null">
+                contact_address,
+            </if>
+            <if test="economicType != null">
+                economic_type,
+            </if>
+            <if test="regCapital != null">
+                reg_capital,
+            </if>
+            <if test="legalName != null">
+                legal_name,
+            </if>
+            <if test="legalId != null">
+                legal_id,
+            </if>
+            <if test="legalPhone != null">
+                legal_phone,
+            </if>
+            <if test="legalPhoto != null">
+                legal_photo,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="reserved != null">
+                reserved,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="identifier != null">
+                #{identifier,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null">
+                #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="contactAddress != null">
+                #{contactAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="economicType != null">
+                #{economicType,jdbcType=VARCHAR},
+            </if>
+            <if test="regCapital != null">
+                #{regCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null">
+                #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalId != null">
+                #{legalId,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPhone != null">
+                #{legalPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPhoto != null">
+                #{legalPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="reserved != null">
+                #{reserved,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany">
+        update netcar_base_info_company
+        <set>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="identifier != null">
+                identifier = #{identifier,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null">
+                business_scope = #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="contactAddress != null">
+                contact_address = #{contactAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="economicType != null">
+                economic_type = #{economicType,jdbcType=VARCHAR},
+            </if>
+            <if test="regCapital != null">
+                reg_capital = #{regCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null">
+                legal_name = #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalId != null">
+                legal_id = #{legalId,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPhone != null">
+                legal_phone = #{legalPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPhoto != null">
+                legal_photo = #{legalPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="reserved != null">
+                reserved = #{reserved,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where company_id = #{companyId,jdbcType=VARCHAR}
+        and address = #{address,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany">
+    update netcar_base_info_company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      business_scope = #{businessScope,jdbcType=VARCHAR},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      economic_type = #{economicType,jdbcType=VARCHAR},
+      reg_capital = #{regCapital,jdbcType=VARCHAR},
+      legal_name = #{legalName,jdbcType=VARCHAR},
+      legal_id = #{legalId,jdbcType=VARCHAR},
+      legal_phone = #{legalPhone,jdbcType=VARCHAR},
+      legal_photo = #{legalPhoto,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and address = #{address,jdbcType=INTEGER}
+  </update>
+
+
+
+
+    <select id="selectCompanyList" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompany"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_company
+        <where>
+            <if test="companyId != null">
+                and company_id = #{companyId,jdbcType=VARCHAR}
+            </if>
+
+            <if test="companyId == null">
+                and company_id in (select company_id from netcar_base_info_company_service where service_no in (select busiRegNumber from yunzheng_base_info_company))
+            </if>
+            <if test="keyword != null">
+                and service_name LIKE concat('%',#{keyWord},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCompanyId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_company
+        where company_id = #{companyId}
+    </select>
+
+    <select id="getCompanyByAddress" resultType="Map" parameterType="Integer">
+      SELECT company_name,company_id FROM `netcar_base_info_company` where address= #{address}
+  </select>
+
+    <select id="queryCompanyListByIds" parameterType="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_company
+        where company_id in
+        <foreach collection="corpIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+<!--    <select id="selectCompanyExcelList" parameterType="map" resultType="com.zhcx.netcarbasic.pojo.excel.CompanyExcel">-->
+<!--        select-->
+<!--        company_id as companyId,-->
+<!--        company_name as companyName,-->
+<!--        address,-->
+<!--        identifier,-->
+<!--        business_scope as businessScope,-->
+<!--        contact_address as contactAddress,-->
+<!--        economic_type as economicType,-->
+<!--        reg_capital as regCapital,-->
+<!--        legal_name as legalName,-->
+<!--        legal_id as legalId,-->
+<!--        legal_phone as legalPhone-->
+<!--        from netcar_base_info_company-->
+<!--        <where>-->
+<!--            <if test="companyId != null">-->
+<!--                and company_id = #{companyId,jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            <if test="companyId == null">-->
+<!--                and company_id in (select company_id from netcar_base_info_company_service where service_no in (select busiRegNumber from yunzheng_base_info_company))-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+</mapper>

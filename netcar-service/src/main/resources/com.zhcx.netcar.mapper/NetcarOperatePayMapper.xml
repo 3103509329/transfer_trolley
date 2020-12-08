@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarOperatePayMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarOperatePay">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="on_area" jdbcType="INTEGER" property="onArea" />
+    <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
+    <result column="license_id" jdbcType="VARCHAR" property="licenseId" />
+    <result column="fare_type" jdbcType="VARCHAR" property="fareType" />
+    <result column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo" />
+    <result column="book_dep_time" jdbcType="VARCHAR" property="bookDepTime" />
+    <result column="wait_time" jdbcType="INTEGER" property="waitTime" />
+    <result column="dep_longitude" jdbcType="DOUBLE" property="depLongitude" />
+    <result column="dep_latitude" jdbcType="DOUBLE" property="depLatitude" />
+    <result column="dep_area" jdbcType="VARCHAR" property="depArea" />
+    <result column="dep_time" jdbcType="VARCHAR" property="depTime" />
+    <result column="dest_longitude" jdbcType="DOUBLE" property="destLongitude" />
+    <result column="dest_latitude" jdbcType="DOUBLE" property="destLatitude" />
+    <result column="dest_area" jdbcType="VARCHAR" property="destArea" />
+    <result column="dest_time" jdbcType="VARCHAR" property="destTime" />
+    <result column="book_model" jdbcType="VARCHAR" property="bookModel" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="drive_mile" jdbcType="DOUBLE" property="driveMile" />
+    <result column="drive_time" jdbcType="INTEGER" property="driveTime" />
+    <result column="wait_mile" jdbcType="DOUBLE" property="waitMile" />
+    <result column="fact_price" jdbcType="DOUBLE" property="factPrice" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="cash_price" jdbcType="DOUBLE" property="cashPrice" />
+    <result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    <result column="line_price" jdbcType="DOUBLE" property="linePrice" />
+    <result column="pos_name" jdbcType="VARCHAR" property="posName" />
+    <result column="pos_price" jdbcType="DOUBLE" property="posPrice" />
+    <result column="benfit_price" jdbcType="DOUBLE" property="benfitPrice" />
+    <result column="book_tip" jdbcType="DOUBLE" property="bookTip" />
+    <result column="passenger_tip" jdbcType="DOUBLE" property="passengerTip" />
+    <result column="peak_up_price" jdbcType="DOUBLE" property="peakUpPrice" />
+    <result column="night_up_price" jdbcType="DOUBLE" property="nightUpPrice" />
+    <result column="far_up_price" jdbcType="DOUBLE" property="farUpPrice" />
+    <result column="other_up_price" jdbcType="DOUBLE" property="otherUpPrice" />
+    <result column="pay_state" jdbcType="VARCHAR" property="payState" />
+    <result column="pay_time" jdbcType="VARCHAR" property="payTime" />
+    <result column="order_match_time" jdbcType="VARCHAR" property="orderMatchTime" />
+    <result column="invoice_status" jdbcType="INTEGER" property="invoiceStatus" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, order_id, on_area, driver_name, license_id, fare_type, vehicle_no, book_dep_time, 
+    wait_time, dep_longitude, dep_latitude, dep_area, dep_time, dest_longitude, dest_latitude, 
+    dest_area, dest_time, book_model, model, drive_mile, drive_time, wait_mile, fact_price, 
+    price, cash_price, line_name, line_price, pos_name, pos_price, benfit_price, book_tip, 
+    passenger_tip, peak_up_price, night_up_price, far_up_price, other_up_price, pay_state, 
+    pay_time, order_match_time, invoice_status, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_operate_pay
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_operate_pay
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarOperatePay">
+    insert into netcar_operate_pay (company_id, order_id, on_area, 
+      driver_name, license_id, fare_type, 
+      vehicle_no, book_dep_time, wait_time, 
+      dep_longitude, dep_latitude, dep_area, 
+      dep_time, dest_longitude, dest_latitude, 
+      dest_area, dest_time, book_model, 
+      model, drive_mile, drive_time, 
+      wait_mile, fact_price, price, 
+      cash_price, line_name, line_price, 
+      pos_name, pos_price, benfit_price, 
+      book_tip, passenger_tip, peak_up_price, 
+      night_up_price, far_up_price, other_up_price, 
+      pay_state, pay_time, order_match_time, 
+      invoice_status, reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{onArea,jdbcType=INTEGER}, 
+      #{driverName,jdbcType=VARCHAR}, #{licenseId,jdbcType=VARCHAR}, #{fareType,jdbcType=VARCHAR}, 
+      #{vehicleNo,jdbcType=VARCHAR}, #{bookDepTime,jdbcType=VARCHAR}, #{waitTime,jdbcType=INTEGER}, 
+      #{depLongitude,jdbcType=DOUBLE}, #{depLatitude,jdbcType=DOUBLE}, #{depArea,jdbcType=VARCHAR}, 
+      #{depTime,jdbcType=VARCHAR}, #{destLongitude,jdbcType=DOUBLE}, #{destLatitude,jdbcType=DOUBLE}, 
+      #{destArea,jdbcType=VARCHAR}, #{destTime,jdbcType=VARCHAR}, #{bookModel,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{driveMile,jdbcType=DOUBLE}, #{driveTime,jdbcType=INTEGER}, 
+      #{waitMile,jdbcType=DOUBLE}, #{factPrice,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, 
+      #{cashPrice,jdbcType=DOUBLE}, #{lineName,jdbcType=VARCHAR}, #{linePrice,jdbcType=DOUBLE}, 
+      #{posName,jdbcType=VARCHAR}, #{posPrice,jdbcType=DOUBLE}, #{benfitPrice,jdbcType=DOUBLE}, 
+      #{bookTip,jdbcType=DOUBLE}, #{passengerTip,jdbcType=DOUBLE}, #{peakUpPrice,jdbcType=DOUBLE}, 
+      #{nightUpPrice,jdbcType=DOUBLE}, #{farUpPrice,jdbcType=DOUBLE}, #{otherUpPrice,jdbcType=DOUBLE}, 
+      #{payState,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR}, #{orderMatchTime,jdbcType=VARCHAR}, 
+      #{invoiceStatus,jdbcType=INTEGER}, #{reserved,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOperatePay">
+    insert into netcar_operate_pay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="onArea != null">
+        on_area,
+      </if>
+      <if test="driverName != null">
+        driver_name,
+      </if>
+      <if test="licenseId != null">
+        license_id,
+      </if>
+      <if test="fareType != null">
+        fare_type,
+      </if>
+      <if test="vehicleNo != null">
+        vehicle_no,
+      </if>
+      <if test="bookDepTime != null">
+        book_dep_time,
+      </if>
+      <if test="waitTime != null">
+        wait_time,
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude,
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude,
+      </if>
+      <if test="depArea != null">
+        dep_area,
+      </if>
+      <if test="depTime != null">
+        dep_time,
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude,
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude,
+      </if>
+      <if test="destArea != null">
+        dest_area,
+      </if>
+      <if test="destTime != null">
+        dest_time,
+      </if>
+      <if test="bookModel != null">
+        book_model,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="driveMile != null">
+        drive_mile,
+      </if>
+      <if test="driveTime != null">
+        drive_time,
+      </if>
+      <if test="waitMile != null">
+        wait_mile,
+      </if>
+      <if test="factPrice != null">
+        fact_price,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="cashPrice != null">
+        cash_price,
+      </if>
+      <if test="lineName != null">
+        line_name,
+      </if>
+      <if test="linePrice != null">
+        line_price,
+      </if>
+      <if test="posName != null">
+        pos_name,
+      </if>
+      <if test="posPrice != null">
+        pos_price,
+      </if>
+      <if test="benfitPrice != null">
+        benfit_price,
+      </if>
+      <if test="bookTip != null">
+        book_tip,
+      </if>
+      <if test="passengerTip != null">
+        passenger_tip,
+      </if>
+      <if test="peakUpPrice != null">
+        peak_up_price,
+      </if>
+      <if test="nightUpPrice != null">
+        night_up_price,
+      </if>
+      <if test="farUpPrice != null">
+        far_up_price,
+      </if>
+      <if test="otherUpPrice != null">
+        other_up_price,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="orderMatchTime != null">
+        order_match_time,
+      </if>
+      <if test="invoiceStatus != null">
+        invoice_status,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="onArea != null">
+        #{onArea,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null">
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="fareType != null">
+        #{fareType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNo != null">
+        #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDepTime != null">
+        #{bookDepTime,jdbcType=VARCHAR},
+      </if>
+      <if test="waitTime != null">
+        #{waitTime,jdbcType=INTEGER},
+      </if>
+      <if test="depLongitude != null">
+        #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depArea != null">
+        #{depArea,jdbcType=VARCHAR},
+      </if>
+      <if test="depTime != null">
+        #{depTime,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destArea != null">
+        #{destArea,jdbcType=VARCHAR},
+      </if>
+      <if test="destTime != null">
+        #{destTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bookModel != null">
+        #{bookModel,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="driveMile != null">
+        #{driveMile,jdbcType=DOUBLE},
+      </if>
+      <if test="driveTime != null">
+        #{driveTime,jdbcType=INTEGER},
+      </if>
+      <if test="waitMile != null">
+        #{waitMile,jdbcType=DOUBLE},
+      </if>
+      <if test="factPrice != null">
+        #{factPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="cashPrice != null">
+        #{cashPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="lineName != null">
+        #{lineName,jdbcType=VARCHAR},
+      </if>
+      <if test="linePrice != null">
+        #{linePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="posName != null">
+        #{posName,jdbcType=VARCHAR},
+      </if>
+      <if test="posPrice != null">
+        #{posPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="benfitPrice != null">
+        #{benfitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookTip != null">
+        #{bookTip,jdbcType=DOUBLE},
+      </if>
+      <if test="passengerTip != null">
+        #{passengerTip,jdbcType=DOUBLE},
+      </if>
+      <if test="peakUpPrice != null">
+        #{peakUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="nightUpPrice != null">
+        #{nightUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="farUpPrice != null">
+        #{farUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="otherUpPrice != null">
+        #{otherUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payState != null">
+        #{payState,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMatchTime != null">
+        #{orderMatchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceStatus != null">
+        #{invoiceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOperatePay">
+    update netcar_operate_pay
+    <set>
+      <if test="onArea != null">
+        on_area = #{onArea,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null">
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        license_id = #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="fareType != null">
+        fare_type = #{fareType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNo != null">
+        vehicle_no = #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDepTime != null">
+        book_dep_time = #{bookDepTime,jdbcType=VARCHAR},
+      </if>
+      <if test="waitTime != null">
+        wait_time = #{waitTime,jdbcType=INTEGER},
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depArea != null">
+        dep_area = #{depArea,jdbcType=VARCHAR},
+      </if>
+      <if test="depTime != null">
+        dep_time = #{depTime,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destArea != null">
+        dest_area = #{destArea,jdbcType=VARCHAR},
+      </if>
+      <if test="destTime != null">
+        dest_time = #{destTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bookModel != null">
+        book_model = #{bookModel,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="driveMile != null">
+        drive_mile = #{driveMile,jdbcType=DOUBLE},
+      </if>
+      <if test="driveTime != null">
+        drive_time = #{driveTime,jdbcType=INTEGER},
+      </if>
+      <if test="waitMile != null">
+        wait_mile = #{waitMile,jdbcType=DOUBLE},
+      </if>
+      <if test="factPrice != null">
+        fact_price = #{factPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="cashPrice != null">
+        cash_price = #{cashPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="lineName != null">
+        line_name = #{lineName,jdbcType=VARCHAR},
+      </if>
+      <if test="linePrice != null">
+        line_price = #{linePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="posName != null">
+        pos_name = #{posName,jdbcType=VARCHAR},
+      </if>
+      <if test="posPrice != null">
+        pos_price = #{posPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="benfitPrice != null">
+        benfit_price = #{benfitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookTip != null">
+        book_tip = #{bookTip,jdbcType=DOUBLE},
+      </if>
+      <if test="passengerTip != null">
+        passenger_tip = #{passengerTip,jdbcType=DOUBLE},
+      </if>
+      <if test="peakUpPrice != null">
+        peak_up_price = #{peakUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="nightUpPrice != null">
+        night_up_price = #{nightUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="farUpPrice != null">
+        far_up_price = #{farUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="otherUpPrice != null">
+        other_up_price = #{otherUpPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMatchTime != null">
+        order_match_time = #{orderMatchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceStatus != null">
+        invoice_status = #{invoiceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarOperatePay">
+    update netcar_operate_pay
+    set on_area = #{onArea,jdbcType=INTEGER},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      license_id = #{licenseId,jdbcType=VARCHAR},
+      fare_type = #{fareType,jdbcType=VARCHAR},
+      vehicle_no = #{vehicleNo,jdbcType=VARCHAR},
+      book_dep_time = #{bookDepTime,jdbcType=VARCHAR},
+      wait_time = #{waitTime,jdbcType=INTEGER},
+      dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      dep_area = #{depArea,jdbcType=VARCHAR},
+      dep_time = #{depTime,jdbcType=VARCHAR},
+      dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      dest_area = #{destArea,jdbcType=VARCHAR},
+      dest_time = #{destTime,jdbcType=VARCHAR},
+      book_model = #{bookModel,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      drive_mile = #{driveMile,jdbcType=DOUBLE},
+      drive_time = #{driveTime,jdbcType=INTEGER},
+      wait_mile = #{waitMile,jdbcType=DOUBLE},
+      fact_price = #{factPrice,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      cash_price = #{cashPrice,jdbcType=DOUBLE},
+      line_name = #{lineName,jdbcType=VARCHAR},
+      line_price = #{linePrice,jdbcType=DOUBLE},
+      pos_name = #{posName,jdbcType=VARCHAR},
+      pos_price = #{posPrice,jdbcType=DOUBLE},
+      benfit_price = #{benfitPrice,jdbcType=DOUBLE},
+      book_tip = #{bookTip,jdbcType=DOUBLE},
+      passenger_tip = #{passengerTip,jdbcType=DOUBLE},
+      peak_up_price = #{peakUpPrice,jdbcType=DOUBLE},
+      night_up_price = #{nightUpPrice,jdbcType=DOUBLE},
+      far_up_price = #{farUpPrice,jdbcType=DOUBLE},
+      other_up_price = #{otherUpPrice,jdbcType=DOUBLE},
+      pay_state = #{payState,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=VARCHAR},
+      order_match_time = #{orderMatchTime,jdbcType=VARCHAR},
+      invoice_status = #{invoiceStatus,jdbcType=INTEGER},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+    <select id="queryOperatePayListByCondition" parameterType="com.zhcx.netcar.params.OperateParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_operate_pay
+        <where>
+<!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="searchType == 'licenseId' and keyword != null">
+                and license_id like concat('%',#{keyword},'%')
+            </if>
+            <if test="searchType == 'vehicleNo' and keyword != null">
+                and vehicle_no like concat('%',#{keyword},'%')
+            </if>
+            <if test="searchType == 'orderId' and keyword != null">
+                and order_id like concat('%',#{keyword},'%')
+            </if>
+            <if test="startTime != null and endTime != null">
+                and pay_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+</mapper>

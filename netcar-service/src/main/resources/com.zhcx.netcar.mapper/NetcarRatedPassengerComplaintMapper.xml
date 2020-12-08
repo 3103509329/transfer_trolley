@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarRatedPassengerComplaintMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarRatedPassengerComplaint">
+        <id column="company_id" jdbcType="VARCHAR" property="companyId"/>
+        <id column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <id column="complaint_time" jdbcType="VARCHAR" property="complaintTime"/>
+        <result column="detail" jdbcType="VARCHAR" property="detail"/>
+        <result column="result" jdbcType="VARCHAR" property="result"/>
+        <result column="reserved" jdbcType="VARCHAR" property="reserved"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    company_id, order_id, complaint_time, detail, result, reserved
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_rated_passenger_complaint
+        where company_id = #{companyId,jdbcType=VARCHAR}
+        and order_id = #{orderId,jdbcType=VARCHAR}
+        and complaint_time = #{complaintTime,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_rated_passenger_complaint
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+      and complaint_time = #{complaintTime,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedPassengerComplaint">
+    insert into netcar_rated_passenger_complaint (company_id, order_id, complaint_time, 
+      detail, result, reserved
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{complaintTime,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{reserved,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedPassengerComplaint">
+        insert into netcar_rated_passenger_complaint
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="complaintTime != null">
+                complaint_time,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="reserved != null">
+                reserved,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="complaintTime != null">
+                #{complaintTime,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved != null">
+                #{reserved,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedPassengerComplaint">
+        update netcar_rated_passenger_complaint
+        <set>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                result = #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved != null">
+                reserved = #{reserved,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where company_id = #{companyId,jdbcType=VARCHAR}
+        and order_id = #{orderId,jdbcType=VARCHAR}
+        and complaint_time = #{complaintTime,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedPassengerComplaint">
+    update netcar_rated_passenger_complaint
+    set detail = #{detail,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+      and complaint_time = #{complaintTime,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="selectListByKeyword" resultMap="BaseResultMap"
+            parameterType="com.zhcx.netcar.params.PassengerComplainParam">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_rated_passenger_complaint
+        <where>
+            <!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+            <if test="companyId != null and companyId != ''">
+                and company_id = #{companyId}
+            </if>
+            <if test="orderId !=null and orderId != ''">
+                and order_id like concat('%',#{orderId},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and complaint_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryPassengerComplaintvehicleNo" resultMap="BaseResultMap" parameterType="string">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        netcar_rated_passenger_complaint complaint
+        WHERE
+        complaint.order_id IN ( SELECT pay.order_id FROM netcar_operate_pay pay WHERE pay.vehicle_no = #{vehicleNo} )
+    </select>
+</mapper>

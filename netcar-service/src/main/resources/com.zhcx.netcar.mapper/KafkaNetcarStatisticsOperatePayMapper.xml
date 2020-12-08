@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.statistical.KafkaNetcarStatisticsOperatePayMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePay">
+        <id column="COMPANY_ID" jdbcType="VARCHAR" property="companyId"/>
+        <id column="TIME" jdbcType="VARCHAR" property="time"/>
+        <id column="VEHICLE_NO" jdbcType="VARCHAR" property="vehicleNo"/>
+        <id column="fact_price_sum" jdbcType="DOUBLE" property="factPriceSum"/>
+        <result column="ON_AREA" jdbcType="VARCHAR" property="onArea"/>
+        <result column="drive_mile_sum" jdbcType="INTEGER" property="driveMileSum"/>
+        <result column="drive_time_sum" jdbcType="INTEGER" property="driveTimeSum"/>
+        <result column="order_count" jdbcType="INTEGER" property="orderCount"/>
+        <result column="wait_mile_sum" jdbcType="INTEGER" property="waitMileSum"/>
+        <result column="wait_time_sum" jdbcType="INTEGER" property="waitTimeSum"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    COMPANY_ID, TIME, VEHICLE_NO, fact_price_sum, ON_AREA, drive_mile_sum, drive_time_sum, 
+    order_count, wait_mile_sum, wait_time_sum
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePayKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from kafka_netcar_statistics_operatePay
+        where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+        and TIME = #{time,jdbcType=VARCHAR}
+        and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+        and fact_price_sum = #{factPriceSum,jdbcType=DOUBLE}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePayKey">
+    delete from kafka_netcar_statistics_operatePay
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+      and TIME = #{time,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and fact_price_sum = #{factPriceSum,jdbcType=DOUBLE}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePay">
+    insert into kafka_netcar_statistics_operatePay (COMPANY_ID, TIME, VEHICLE_NO, 
+      fact_price_sum, ON_AREA, drive_mile_sum, 
+      drive_time_sum, order_count, wait_mile_sum, 
+      wait_time_sum)
+    values (#{companyId,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{vehicleNo,jdbcType=VARCHAR}, 
+      #{factPriceSum,jdbcType=DOUBLE}, #{onArea,jdbcType=VARCHAR}, #{driveMileSum,jdbcType=INTEGER}, 
+      #{driveTimeSum,jdbcType=INTEGER}, #{orderCount,jdbcType=INTEGER}, #{waitMileSum,jdbcType=INTEGER}, 
+      #{waitTimeSum,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePay">
+        insert into kafka_netcar_statistics_operatePay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                COMPANY_ID,
+            </if>
+            <if test="time != null">
+                TIME,
+            </if>
+            <if test="vehicleNo != null">
+                VEHICLE_NO,
+            </if>
+            <if test="factPriceSum != null">
+                fact_price_sum,
+            </if>
+            <if test="onArea != null">
+                ON_AREA,
+            </if>
+            <if test="driveMileSum != null">
+                drive_mile_sum,
+            </if>
+            <if test="driveTimeSum != null">
+                drive_time_sum,
+            </if>
+            <if test="orderCount != null">
+                order_count,
+            </if>
+            <if test="waitMileSum != null">
+                wait_mile_sum,
+            </if>
+            <if test="waitTimeSum != null">
+                wait_time_sum,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleNo != null">
+                #{vehicleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="factPriceSum != null">
+                #{factPriceSum,jdbcType=DOUBLE},
+            </if>
+            <if test="onArea != null">
+                #{onArea,jdbcType=VARCHAR},
+            </if>
+            <if test="driveMileSum != null">
+                #{driveMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="driveTimeSum != null">
+                #{driveTimeSum,jdbcType=INTEGER},
+            </if>
+            <if test="orderCount != null">
+                #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="waitMileSum != null">
+                #{waitMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="waitTimeSum != null">
+                #{waitTimeSum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePay">
+        update kafka_netcar_statistics_operatePay
+        <set>
+            <if test="onArea != null">
+                ON_AREA = #{onArea,jdbcType=VARCHAR},
+            </if>
+            <if test="driveMileSum != null">
+                drive_mile_sum = #{driveMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="driveTimeSum != null">
+                drive_time_sum = #{driveTimeSum,jdbcType=INTEGER},
+            </if>
+            <if test="orderCount != null">
+                order_count = #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="waitMileSum != null">
+                wait_mile_sum = #{waitMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="waitTimeSum != null">
+                wait_time_sum = #{waitTimeSum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+        and TIME = #{time,jdbcType=VARCHAR}
+        and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+        and fact_price_sum = #{factPriceSum,jdbcType=DOUBLE}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePay">
+    update kafka_netcar_statistics_operatePay
+    set ON_AREA = #{onArea,jdbcType=VARCHAR},
+      drive_mile_sum = #{driveMileSum,jdbcType=INTEGER},
+      drive_time_sum = #{driveTimeSum,jdbcType=INTEGER},
+      order_count = #{orderCount,jdbcType=INTEGER},
+      wait_mile_sum = #{waitMileSum,jdbcType=INTEGER},
+      wait_time_sum = #{waitTimeSum,jdbcType=INTEGER}
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+      and TIME = #{time,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and fact_price_sum = #{factPriceSum,jdbcType=DOUBLE}
+  </update>
+
+
+    <select id="selectByDate" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePayKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        <if test="dateType = year">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy' ) AS TIME
+        </if>
+        <if test="dateType = month">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM' ) AS TIME
+        </if>
+        <if test="dateType = day">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd' ) AS TIME
+        </if>
+        <if test="dateType = hour">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd HH' ) AS TIME
+        </if>
+        <if test="dateType = hour">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd' ) AS TIME
+        </if>
+
+        from kafka_netcar_statistics_operatePay pay
+        <where>
+            <if test="dateType = year">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME) ,'yyyy') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME) ,'yyyy') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = month">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = day">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = hour">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = null or dateType = ''">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="join != null and join != ''">
+                and pay.company_id in (#{join})
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSUMByDate" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsOperatePayKey"
+            resultMap="BaseResultMap">
+        SELECT
+        COMPANY_ID AS companyId,
+        TIME_FORMAT( TIME, 'yyyy-MM-dd' ) moment,
+        sum( wait_mile_sum ) AS waitMileSum,
+        sum( drive_mile_sum ) AS driveMileSum
+        FROM
+        kafka_netcar_statistics_haul_distance_output
+        <where>
+
+        </where>
+    </select>
+</mapper>

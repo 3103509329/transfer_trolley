@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarBaseInfoDriverAppMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarBaseInfoDriverApp">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="license_id" jdbcType="VARCHAR" property="licenseId" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="driver_phone" jdbcType="VARCHAR" property="driverPhone" />
+    <result column="net_type" jdbcType="INTEGER" property="netType" />
+    <result column="app_version" jdbcType="VARCHAR" property="appVersion" />
+    <result column="map_type" jdbcType="INTEGER" property="mapType" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, license_id, address, driver_phone, net_type, app_version, map_type, state, 
+    flag, update_time, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_base_info_driver_app
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_base_info_driver_app
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoDriverApp">
+    insert into netcar_base_info_driver_app (company_id, license_id, address, 
+      driver_phone, net_type, app_version, 
+      map_type, state, flag, 
+      update_time, reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{licenseId,jdbcType=VARCHAR}, #{address,jdbcType=INTEGER}, 
+      #{driverPhone,jdbcType=VARCHAR}, #{netType,jdbcType=INTEGER}, #{appVersion,jdbcType=VARCHAR}, 
+      #{mapType,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=VARCHAR}, #{reserved,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoDriverApp">
+    insert into netcar_base_info_driver_app
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="licenseId != null">
+        license_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="driverPhone != null">
+        driver_phone,
+      </if>
+      <if test="netType != null">
+        net_type,
+      </if>
+      <if test="appVersion != null">
+        app_version,
+      </if>
+      <if test="mapType != null">
+        map_type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="driverPhone != null">
+        #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="netType != null">
+        #{netType,jdbcType=INTEGER},
+      </if>
+      <if test="appVersion != null">
+        #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mapType != null">
+        #{mapType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoDriverApp">
+    update netcar_base_info_driver_app
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="driverPhone != null">
+        driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="netType != null">
+        net_type = #{netType,jdbcType=INTEGER},
+      </if>
+      <if test="appVersion != null">
+        app_version = #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mapType != null">
+        map_type = #{mapType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoDriverApp">
+    update netcar_base_info_driver_app
+    set address = #{address,jdbcType=INTEGER},
+      driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      net_type = #{netType,jdbcType=INTEGER},
+      app_version = #{appVersion,jdbcType=VARCHAR},
+      map_type = #{mapType,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectDriverAppList" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_driver_app
+        <where>
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="keyword != null">
+                and driver_phone like CONCAT('%',#{keyword},'%')
+            </if>
+<!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+<!--            and license_id in (select cardno from yunzheng_base_info_driver)-->
+        </where>
+    </select>
+
+    <select id="selectDriverAppByLicenseId" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_driver_app
+        <where>
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="licenseId != null">
+                and license_id = #{licenseId}
+            </if>
+            and license_id in (select cardno from yunzheng_base_info_driver)
+            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)
+        </where>
+    </select>
+
+</mapper>

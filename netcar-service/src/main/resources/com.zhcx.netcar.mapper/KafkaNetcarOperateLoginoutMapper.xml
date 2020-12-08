@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.statistical.KafkaNetcarOperateLoginoutMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginout">
+    <id column="TIME" jdbcType="VARCHAR" property="time" />
+    <id column="LICENSE_ID" jdbcType="VARCHAR" property="licenseId" />
+    <id column="VEHICLE_NO" jdbcType="VARCHAR" property="vehicleNo" />
+    <id column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="LOG_TYPE" jdbcType="INTEGER" property="logType" />
+    <result column="log_count" jdbcType="INTEGER" property="logCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TIME, LICENSE_ID, VEHICLE_NO, COMPANY_ID, LOG_TYPE, log_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginoutKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kafka_netcar_operate_loginout
+    where TIME = #{time,jdbcType=VARCHAR}
+      and LICENSE_ID = #{licenseId,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginoutKey">
+    delete from kafka_netcar_operate_loginout
+    where TIME = #{time,jdbcType=VARCHAR}
+      and LICENSE_ID = #{licenseId,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginout">
+    insert into kafka_netcar_operate_loginout (TIME, LICENSE_ID, VEHICLE_NO, 
+      COMPANY_ID, LOG_TYPE, log_count
+      )
+    values (#{time,jdbcType=VARCHAR}, #{licenseId,jdbcType=VARCHAR}, #{vehicleNo,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{logType,jdbcType=INTEGER}, #{logCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginout">
+    insert into kafka_netcar_operate_loginout
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="time != null">
+        TIME,
+      </if>
+      <if test="licenseId != null">
+        LICENSE_ID,
+      </if>
+      <if test="vehicleNo != null">
+        VEHICLE_NO,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="logType != null">
+        LOG_TYPE,
+      </if>
+      <if test="logCount != null">
+        log_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNo != null">
+        #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="logCount != null">
+        #{logCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginout">
+    update kafka_netcar_operate_loginout
+    <set>
+      <if test="logType != null">
+        LOG_TYPE = #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="logCount != null">
+        log_count = #{logCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TIME = #{time,jdbcType=VARCHAR}
+      and LICENSE_ID = #{licenseId,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarOperateLoginout">
+    update kafka_netcar_operate_loginout
+    set LOG_TYPE = #{logType,jdbcType=INTEGER},
+      log_count = #{logCount,jdbcType=INTEGER}
+    where TIME = #{time,jdbcType=VARCHAR}
+      and LICENSE_ID = #{licenseId,jdbcType=VARCHAR}
+      and VEHICLE_NO = #{vehicleNo,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByLoInOut" resultMap="BaseResultMap">
+    select COMPANY_ID, LICENSE_ID, VEHICLE_NO, LOG_TYPE, log_count
+    netcar_operate_loginout
+    <where>
+      <if test="dateType = year">
+        <choose>
+          <when test="EDate == null or EDate == ''">
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME) ,'yyyy') = #{SDate}
+          </when>
+          <otherwise>
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME) ,'yyyy') &gt;= #{SDate}
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy') &lt;= #{#{EDate}
+          </otherwise>
+        </choose>
+
+      </if>
+      <if test="dateType = month">
+        <choose>
+          <when test="EDate == null or EDate == ''">
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM') = #{SDate}
+          </when>
+          <otherwise>
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM') &gt;= #{SDate}
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM') &lt;= #{#{EDate}
+          </otherwise>
+        </choose>
+
+      </if>
+      <if test="dateType = day">
+        <choose>
+          <when test="EDate == null or EDate == ''">
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') = #{SDate}
+          </when>
+          <otherwise>
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') &gt;= #{SDate}
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+          </otherwise>
+        </choose>
+
+      </if>
+      <if test="dateType = hour">
+        <choose>
+          <when test="EDate == null or EDate == ''">
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd HH') = #{SDate}
+          </when>
+          <otherwise>
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd HH') &gt;= #{SDate}
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd HH') &lt;= #{#{EDate}
+          </otherwise>
+        </choose>
+
+      </if>
+      <if test="dateType = null or dateType = ''">
+        <choose>
+          <when test="EDate == null or EDate == ''">
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') = #{SDate}
+          </when>
+          <otherwise>
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') &gt;= #{SDate}
+            and TIME_FORMAT(UNIX_TIMESTAMP(TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+          </otherwise>
+        </choose>
+
+      </if>
+      <if test="join != null and join != ''">
+        and pay.company_id in (#{join})
+      </if>
+    </where>
+  </select>
+</mapper>

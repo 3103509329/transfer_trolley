@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.BaseCityMapper" >
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.BaseCity" >
+    <constructor >
+      <idArg column="uuid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="corp_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="settlement_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="settlement_xypoint" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="city_py" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="city_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_hot" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="province" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, corp_id, create_by, create_time, update_time, update_by, settlement_name, settlement_xypoint, 
+    city_py, city_name, is_hot, province
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_city
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from base_city
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.BaseCity" >
+    insert into base_city (uuid, corp_id, create_by, 
+      create_time, update_time, update_by, 
+      settlement_name, settlement_xypoint, city_py, 
+      city_name, is_hot, province
+      )
+    values (#{uuid,jdbcType=BIGINT}, #{corpId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{settlementName,jdbcType=VARCHAR}, #{settlementXypoint,jdbcType=VARCHAR}, #{cityPy,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR}, #{isHot,jdbcType=INTEGER}, #{province,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.BaseCity" >
+    insert into base_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="corpId != null" >
+        corp_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="settlementName != null" >
+        settlement_name,
+      </if>
+      <if test="settlementXypoint != null" >
+        settlement_xypoint,
+      </if>
+      <if test="cityPy != null" >
+        city_py,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="corpId != null" >
+        #{corpId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementName != null" >
+        #{settlementName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementXypoint != null" >
+        #{settlementXypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="cityPy != null" >
+        #{cityPy,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.BaseCity" >
+    update base_city
+    <set >
+      <if test="corpId != null" >
+        corp_id = #{corpId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementName != null" >
+        settlement_name = #{settlementName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementXypoint != null" >
+        settlement_xypoint = #{settlementXypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="cityPy != null" >
+        city_py = #{cityPy,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=BIGINT},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.BaseCity" >
+    update base_city
+    set corp_id = #{corpId,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      settlement_name = #{settlementName,jdbcType=VARCHAR},
+      settlement_xypoint = #{settlementXypoint,jdbcType=VARCHAR},
+      city_py = #{cityPy,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      province = #{province,jdbcType=BIGINT}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+</mapper>

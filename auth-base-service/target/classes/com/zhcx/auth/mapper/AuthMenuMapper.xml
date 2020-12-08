@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.AuthMenuMapper">
+	<resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.AuthMenu">
+		<id column="uuid" property="uuid" jdbcType="BIGINT" />
+		<result column="creator" property="creator" jdbcType="BIGINT" />
+		<result column="who_modified" property="whoModified" jdbcType="BIGINT" />
+		<result column="time_created" property="timeCreated" jdbcType="VARCHAR" />
+		<result column="time_modified" property="timeModified" jdbcType="VARCHAR" />
+		<result column="menu_code" property="menuCode" jdbcType="VARCHAR" />
+		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+		<result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+		<result column="display_order" property="displayOrder" jdbcType="INTEGER" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+		<result column="iconfont" property="iconfont" jdbcType="VARCHAR" />
+		<result column="str1" property="str1" jdbcType="VARCHAR" />
+		<result column="parentName" property="parentName" jdbcType="VARCHAR" />
+		<result column="application_code" property="applicationCode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		uuid, creator, who_modified, time_created, time_modified,
+		menu_code, menu_name, menu_url, display_order, parent_id,iconfont,str1,application_code
+	</sql>
+
+	<sql id="Select_Where_Clause">
+		<if test="uuid != null">
+			and uuid = #{uuid,jdbcType=BIGINT}
+		</if>
+		<if test="menuCode != null and menuCode != ''">
+			and menu_code = #{menuCode}
+		</if>
+		<if test="menuName != null and menuName != ''">
+			and menu_name like CONCAT('%',#{menuName},'%')
+		</if>
+		<if test="menuUrl != null and menuUrl != ''">
+			and menu_url = #{menuUrl}
+		</if>
+		<if test="displayOrder != null and displayOrder != ''">
+			and display_order = #{displayOrder}
+		</if>
+		<if test="parentId != null">
+			and parent_id = #{parentId}
+		</if>
+		<if test="iconfont != null">
+			and iconfont = #{iconfont}
+		</if>
+		<if test="applicationCode != null and applicationCode != ''">
+			and application_code = #{applicationCode}
+		</if>
+		<if test="queryMenuIds != null and queryMenuIds != ''">
+			and uuid in 
+			<foreach collection="queryMenuIds" index="index" item="item"
+	            open="(" separator="," close=")">
+	            #{item}
+        	</foreach>
+		</if>
+	</sql>
+
+	<!-- -->
+	<select id="selectList" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		SELECT
+		t.uuid,
+		t.creator,
+		t.who_modified,
+		t.time_created,
+		t.time_modified,
+		t.menu_code,
+		t.menu_name,
+		t.menu_url,
+		t.display_order,
+		t.parent_id,
+		t.iconfont,
+		t.str1,
+		(SELECT menu_name
+		FROM t_auth_menu a WHERE a.uuid = t.parent_id) AS parentName,
+		t.application_code
+		FROM
+		t_auth_menu t
+		WHERE 1 = 1
+		<include refid="Select_Where_Clause" />
+		ORDER BY parent_id,display_order
+	</select>
+
+<!-- 	<select id="selectListAndOperation" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		
+	</select> -->
+
+	<!-- -->
+<!-- 	<select id="selectCountByParam" resultType="int" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		select
+		count(1)
+		from t_auth_menu where 1=1
+		<include refid="Select_Where_Clause" />
+	</select> -->
+
+	<!-- -->
+	<select id="selectPageByParam" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		SELECT
+		t.uuid,
+		t.creator,
+		t.who_modified,
+		t.time_created,
+		t.time_modified,
+		t.menu_code,
+		t.menu_name,
+		t.menu_url,
+		t.display_order,
+		t.parent_id,
+		t.iconfont,
+		t.str1,
+		(SELECT menu_name
+		FROM t_auth_menu a WHERE a.uuid = t.parent_id) AS parentName,
+		t.application_code
+		FROM
+		t_auth_menu t
+		WHERE 1 = 1
+		<include refid="Select_Where_Clause" />
+		ORDER BY parent_id,display_order
+	</select>
+
+	<delete id="delete" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		delete from t_auth_menu where 1=1
+		<include refid="Select_Where_Clause" />
+	</delete>
+
+	<insert id="save" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		insert into t_auth_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="whoModified != null">
+				who_modified,
+			</if>
+			<if test="timeCreated != null">
+				time_created,
+			</if>
+			<if test="timeModified != null">
+				time_modified,
+			</if>
+			<if test="menuCode != null">
+				menu_code,
+			</if>
+			<if test="menuName != null">
+				menu_name,
+			</if>
+			<if test="menuUrl != null">
+				menu_url,
+			</if>
+			<if test="displayOrder != null">
+				display_order,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="iconfont != null">
+				iconfont,
+			</if>
+			<if test="str1 != null">
+				str1,
+			</if>
+			<if test="applicationCode != null and applicationCode != ''">
+				application_code
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="uuid != null">
+				#{uuid,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="whoModified != null">
+				#{whoModified,jdbcType=BIGINT},
+			</if>
+			<if test="timeCreated != null">
+				#{timeCreated,jdbcType=VARCHAR},
+			</if>
+			<if test="timeModified != null">
+				#{timeModified,jdbcType=VARCHAR},
+			</if>
+			<if test="menuCode != null">
+				#{menuCode,jdbcType=VARCHAR},
+			</if>
+			<if test="menuName != null">
+				#{menuName,jdbcType=VARCHAR},
+			</if>
+			<if test="menuUrl != null">
+				#{menuUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="displayOrder != null">
+				#{displayOrder,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="iconfont != null">
+				#{iconfont,jdbcType=VARCHAR},
+			</if>
+			<if test="str1 != null">
+				#{str1,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationCode != null and applicationCode != ''">
+				#{applicationCode}
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="com.zhcx.auth.pojo.AuthMenu">
+		update t_auth_menu
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="whoModified != null">
+				who_modified = #{whoModified,jdbcType=BIGINT},
+			</if>
+			<if test="timeCreated != null">
+				time_created = #{timeCreated,jdbcType=VARCHAR},
+			</if>
+			<if test="timeModified != null">
+				time_modified = #{timeModified,jdbcType=VARCHAR},
+			</if>
+			<if test="menuCode != null">
+				menu_code = #{menuCode,jdbcType=VARCHAR},
+			</if>
+			<if test="menuName != null">
+				menu_name = #{menuName,jdbcType=VARCHAR},
+			</if>
+			<if test="menuUrl != null">
+				menu_url = #{menuUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="displayOrder != null">
+				display_order = #{displayOrder,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="iconfont != null">
+				iconfont = #{iconfont,jdbcType=VARCHAR},
+			</if>
+			<if test="str1 != null">
+				str1 = #{str1,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationCode != null and applicationCode != ''">
+				application_code = #{applicationCode}
+			</if>
+		</set>
+		where uuid = #{uuid,jdbcType=BIGINT}
+	</update>
+</mapper>

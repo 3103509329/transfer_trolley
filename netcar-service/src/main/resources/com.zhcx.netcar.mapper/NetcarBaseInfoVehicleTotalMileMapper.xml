@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarBaseInfoVehicleTotalMileMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarBaseInfoVehicleTotalMile">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="total_mile" jdbcType="DOUBLE" property="totalMile" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, vehicle_no, address, total_mile, flag, update_time, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_base_info_vehicle_total_mile
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and vehicle_no = #{vehicleNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_base_info_vehicle_total_mile
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and vehicle_no = #{vehicleNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoVehicleTotalMile">
+    insert into netcar_base_info_vehicle_total_mile (company_id, vehicle_no, address, 
+      total_mile, flag, update_time, 
+      reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{vehicleNo,jdbcType=VARCHAR}, #{address,jdbcType=INTEGER}, 
+      #{totalMile,jdbcType=DOUBLE}, #{flag,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, 
+      #{reserved,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoVehicleTotalMile">
+    insert into netcar_base_info_vehicle_total_mile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="vehicleNo != null">
+        vehicle_no,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="totalMile != null">
+        total_mile,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNo != null">
+        #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="totalMile != null">
+        #{totalMile,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoVehicleTotalMile">
+    update netcar_base_info_vehicle_total_mile
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="totalMile != null">
+        total_mile = #{totalMile,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and vehicle_no = #{vehicleNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoVehicleTotalMile">
+    update netcar_base_info_vehicle_total_mile
+    set address = #{address,jdbcType=INTEGER},
+      total_mile = #{totalMile,jdbcType=DOUBLE},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and vehicle_no = #{vehicleNo,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="selectVehicleTotalMileList" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_vehicle_total_mile
+        <where>
+<!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+<!--            and vehicle_no in (select branum from yunzheng_base_info_vehicle)-->
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="vehicleNo != null">
+                and vehicle_no LIKE CONCAT('%',#{vehicleNo},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectVehicleTotalMileByVehicleNo" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_vehicle_total_mile
+        <where>
+            company_id in (select company_id from netcar_base_info_company_service)
+            and vehicle_no in (select car_num from t_base_info_vehiclelicence)
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="vehicleNo != null">
+                and vehicle_no = #{vehicleNo}
+            </if>
+        </where>
+    </select>
+</mapper>

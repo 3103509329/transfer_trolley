@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.statistical.KafkaNetcarStatisticsHaulDistanceOutputMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsHaulDistanceOutput">
+        <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId"/>
+        <result column="HANDLING_TYPE" jdbcType="VARCHAR" property="handlingType"/>
+        <result column="drive_mile_sum" jdbcType="INTEGER" property="driveMileSum"/>
+        <result column="operate_count" jdbcType="INTEGER" property="operateCount"/>
+        <result column="wait_mile_sum" jdbcType="INTEGER" property="waitMileSum"/>
+        <result column="TIME" jdbcType="VARCHAR" property="time"/>
+        <result column="license_id" jdbcType="VARCHAR" property="licenseId"/>
+        <result column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsHaulDistanceOutput">
+    insert into kafka_netcar_statistics_haul_distance_output (COMPANY_ID, HANDLING_TYPE, drive_mile_sum, 
+      operate_count, wait_mile_sum, TIME, 
+      license_id, vehicle_no)
+    values (#{companyId,jdbcType=VARCHAR}, #{handlingType,jdbcType=VARCHAR}, #{driveMileSum,jdbcType=INTEGER}, 
+      #{operateCount,jdbcType=INTEGER}, #{waitMileSum,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, 
+      #{licenseId,jdbcType=VARCHAR}, #{vehicleNo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective"
+            parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsHaulDistanceOutput">
+        insert into kafka_netcar_statistics_haul_distance_output
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                COMPANY_ID,
+            </if>
+            <if test="handlingType != null">
+                HANDLING_TYPE,
+            </if>
+            <if test="driveMileSum != null">
+                drive_mile_sum,
+            </if>
+            <if test="operateCount != null">
+                operate_count,
+            </if>
+            <if test="waitMileSum != null">
+                wait_mile_sum,
+            </if>
+            <if test="time != null">
+                TIME,
+            </if>
+            <if test="licenseId != null">
+                license_id,
+            </if>
+            <if test="vehicleNo != null">
+                vehicle_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="handlingType != null">
+                #{handlingType,jdbcType=VARCHAR},
+            </if>
+            <if test="driveMileSum != null">
+                #{driveMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="operateCount != null">
+                #{operateCount,jdbcType=INTEGER},
+            </if>
+            <if test="waitMileSum != null">
+                #{waitMileSum,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="licenseId != null">
+                #{licenseId,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleNo != null">
+                #{vehicleNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="selectSUMByDate"
+            parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarStatisticsHaulDistanceOutput"
+            resultMap="BaseResultMap">
+        SELECT
+        COMPANY_ID ,
+        TIME_FORMAT( TIME, 'yyyy-MM-dd' ) TIME,
+        sum( wait_mile_sum ) AS waitMileSum,
+        sum( drive_mile_sum ) AS driveMileSum
+        FROM
+        kafka_netcar_statistics_haul_distance_output
+        <where>
+            1=1
+            <if test="join != null and join != ''">
+                company_id in(#{join})
+            </if>
+            <if test="SDate != null and SDate != ''">
+                and TIME_FORMAT(TIME,'yyyy-MM-dd') &gt;= #{SDate}
+            </if>
+            <if test="EDate != null and EDate != ''">
+                and TIME_FORMAT(TIME,'yyyy-MM-dd') &lt;= #{EDate}
+            </if>
+            group by COMPANY_ID,TIME_FORMAT(TIME,'yyyy-MM-dd')
+        </where>
+    </select>
+    <select id="selectByDateOnDistance" resultMap="BaseResultMap">
+        select
+        COMPANY_ID,
+        HANDLING_TYPE,
+        sum(operate_count) as operateCount
+        from kafka_netcar_statistics_operatePay pay
+        <where>
+            1=1
+            <if test="dateType = year">
+                and TIME_FORMAT(pay.TIME ,'yyyy') = #{SDate}
+            </if>
+            <if test="dateType = month">
+                and TIME_FORMAT(pay.TIME,'yyyy-MM') = #{SDate}
+            </if>
+            <if test="dateType = day">
+                and TIME_FORMAT(pay.TIME,'yyyy-MM-dd') #{SDate}
+            </if>
+            <if test="join != null and join != ''">
+                and pay.company_id in (#{join})
+            </if>
+            group by COMPANY_ID,HANDLING_TYPE
+        </where>
+
+    </select>
+    <select id="selectMonthDistanceData" resultMap="BaseResultMap">
+        SELECT
+        HANDLING_TYPE,
+        sum( operate_count ) as operateCount
+        FROM
+        netcar_statistics_haul_distance_output
+        <where>
+            1=1
+            <if test="SDate != null and SDate != ''">
+                TIME_FORMAT(TIME,'yyyy-MM') = #{SDate}
+            </if>
+            <if test="join != null and join != ''">
+                company_id in (#{join})
+            </if>
+            group by HANDLING_TYPE
+        </where>
+    </select>
+</mapper>
