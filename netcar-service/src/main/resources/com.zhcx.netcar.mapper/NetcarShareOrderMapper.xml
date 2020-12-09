@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarShareOrderMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarShareOrder">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="route_id" jdbcType="VARCHAR" property="routeId" />
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="book_depart_time" jdbcType="VARCHAR" property="bookDepartTime" />
+    <result column="departure" jdbcType="VARCHAR" property="departure" />
+    <result column="dep_longitude" jdbcType="DOUBLE" property="depLongitude" />
+    <result column="dep_latitude" jdbcType="DOUBLE" property="depLatitude" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="dest_longitude" jdbcType="DOUBLE" property="destLongitude" />
+    <result column="dest_latitude" jdbcType="DOUBLE" property="destLatitude" />
+    <result column="encrypt" jdbcType="INTEGER" property="encrypt" />
+    <result column="order_ensure_time" jdbcType="VARCHAR" property="orderEnsureTime" />
+    <result column="passenger_num" jdbcType="INTEGER" property="passengerNum" />
+    <result column="passenger_note" jdbcType="VARCHAR" property="passengerNote" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, route_id, order_id, address, book_depart_time, departure, dep_longitude, 
+    dep_latitude, destination, dest_longitude, dest_latitude, encrypt, order_ensure_time, 
+    passenger_num, passenger_note, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_share_order
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and route_id = #{routeId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_share_order
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and route_id = #{routeId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarShareOrder">
+    insert into netcar_share_order (company_id, route_id, order_id, 
+      address, book_depart_time, departure, 
+      dep_longitude, dep_latitude, destination, 
+      dest_longitude, dest_latitude, encrypt, 
+      order_ensure_time, passenger_num, passenger_note, 
+      reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{address,jdbcType=INTEGER}, #{bookDepartTime,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
+      #{depLongitude,jdbcType=DOUBLE}, #{depLatitude,jdbcType=DOUBLE}, #{destination,jdbcType=VARCHAR}, 
+      #{destLongitude,jdbcType=DOUBLE}, #{destLatitude,jdbcType=DOUBLE}, #{encrypt,jdbcType=INTEGER}, 
+      #{orderEnsureTime,jdbcType=VARCHAR}, #{passengerNum,jdbcType=INTEGER}, #{passengerNote,jdbcType=VARCHAR}, 
+      #{reserved,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarShareOrder">
+    insert into netcar_share_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="routeId != null">
+        route_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="bookDepartTime != null">
+        book_depart_time,
+      </if>
+      <if test="departure != null">
+        departure,
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude,
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude,
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude,
+      </if>
+      <if test="encrypt != null">
+        encrypt,
+      </if>
+      <if test="orderEnsureTime != null">
+        order_ensure_time,
+      </if>
+      <if test="passengerNum != null">
+        passenger_num,
+      </if>
+      <if test="passengerNote != null">
+        passenger_note,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null">
+        #{routeId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="bookDepartTime != null">
+        #{bookDepartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="depLongitude != null">
+        #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="encrypt != null">
+        #{encrypt,jdbcType=INTEGER},
+      </if>
+      <if test="orderEnsureTime != null">
+        #{orderEnsureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerNum != null">
+        #{passengerNum,jdbcType=INTEGER},
+      </if>
+      <if test="passengerNote != null">
+        #{passengerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarShareOrder">
+    update netcar_share_order
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="bookDepartTime != null">
+        book_depart_time = #{bookDepartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="encrypt != null">
+        encrypt = #{encrypt,jdbcType=INTEGER},
+      </if>
+      <if test="orderEnsureTime != null">
+        order_ensure_time = #{orderEnsureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerNum != null">
+        passenger_num = #{passengerNum,jdbcType=INTEGER},
+      </if>
+      <if test="passengerNote != null">
+        passenger_note = #{passengerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and route_id = #{routeId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarShareOrder">
+    update netcar_share_order
+    set address = #{address,jdbcType=INTEGER},
+      book_depart_time = #{bookDepartTime,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      destination = #{destination,jdbcType=VARCHAR},
+      dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      encrypt = #{encrypt,jdbcType=INTEGER},
+      order_ensure_time = #{orderEnsureTime,jdbcType=VARCHAR},
+      passenger_num = #{passengerNum,jdbcType=INTEGER},
+      passenger_note = #{passengerNote,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and route_id = #{routeId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
+    <select id="queryShareOrderListByCondition" parameterType="com.zhcx.netcar.params.QueryParam" resultMap="BaseResultMap">
+        select
+        a.company_id,
+        a.address,
+        a.route_id,
+        a.order_id,
+        a.book_depart_time,
+        a.departure,
+        a.dep_longitude,
+        a.dep_latitude,
+        a.destination,
+        a.dest_longitude,
+        a.dest_latitude,
+        a.encrypt,
+        a.order_ensure_time,
+        a.passenger_num,
+        a.passenger_note
+        from netcar_share_order a
+        <where>
+            <if test="companyId != null">
+                and a.company_id = #{companyId}
+            </if>
+            <if test="searchType == 'routeId' and keyword != null">
+                and a.route_id like concat(#{keyword},'%')
+            </if>
+            <if test="searchType == 'orderId' and keyword != null">
+                and a.order_id like concat(#{keyword},'%')
+            </if>
+            <if test="startTime != null and endTime != null">
+                and a.order_ensure_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+</mapper>

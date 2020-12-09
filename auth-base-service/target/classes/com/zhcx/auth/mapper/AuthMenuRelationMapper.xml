@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.AuthMenuRelationMapper">
+	<resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.AuthMenuRelation">
+		<id column="uuid" property="uuid" jdbcType="BIGINT" />
+		<result column="time_created" property="timeCreated" jdbcType="VARCHAR" />
+		<result column="time_modified" property="timeModified" jdbcType="VARCHAR" />
+		<result column="menu_ids" property="menuIds" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		uuid, menu_ids, role_id, time_created, time_modified
+	</sql>
+
+	<sql id="Select_Where_Clause">
+		<if test="uuid != null">
+			and uuid = #{uuid,jdbcType=BIGINT}
+		</if>
+		<if test="menuIds != null">
+			and menu_ids = #{menuIds,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=BIGINT}
+		</if>
+		<if test="registerIds != null">
+			and role_id in
+				<foreach collection="registerIds" index="index" item="item"
+		            open="(" separator="," close=")">
+		            #{item}
+	        	</foreach>
+		</if>
+	</sql>
+
+	<!-- -->
+	<select id="selectList" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		select
+		<include refid="Base_Column_List" />
+		from t_auth_menu_relation where 1=1
+		<include refid="Select_Where_Clause" />
+	</select>
+
+	<!-- -->
+<!-- 	<select id="selectCountByParam" resultType="int" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		select
+		count(1)
+		from t_auth_menu_relation where 1=1
+		<include refid="Select_Where_Clause" />
+	</select> -->
+
+	<!-- -->
+	<select id="selectPageByParam" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		select
+		<include refid="Base_Column_List" />
+		from t_auth_menu_relation where 1=1
+		<include refid="Select_Where_Clause" />
+	</select>
+
+	<delete id="delete" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		delete from t_auth_menu_relation where 1=1
+		<include refid="Select_Where_Clause" />
+	</delete>
+
+	<insert id="insert" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		insert into t_auth_menu_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="menuIds != null">
+				menu_ids,
+			</if>
+			<if test="timeCreated != null">
+				time_created,
+			</if>
+			<if test="timeModified != null">
+				time_modified,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="uuid != null">
+				#{uuid,jdbcType=BIGINT},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=BIGINT},
+			</if>
+			<if test="menuIds != null">
+				#{menuIds,jdbcType=VARCHAR},
+			</if>
+			<if test="timeCreated != null">
+				#{timeCreated,jdbcType=VARCHAR},
+			</if>
+			<if test="timeModified != null">
+				#{timeModified,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="com.zhcx.auth.pojo.AuthMenuRelation">
+		update t_auth_menu_relation
+		<set>
+			<if test="menuIds != null">
+				menu_ids = #{menuIds,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where				 uuid = #{uuid,jdbcType=BIGINT}
+		<!-- register_id = #{registerId,jdbcType=BIGINT} -->
+	</update>
+</mapper>

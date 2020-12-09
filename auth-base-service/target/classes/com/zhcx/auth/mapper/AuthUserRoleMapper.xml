@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.auth.mapper.AuthUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.AuthUserRole">
+        <result column="uuid" property="uuid"/>
+        <result column="user_id" property="userId"/>
+        <result column="ROLE_ID" property="roleId"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="creator" property="creator"/>
+        <result column="who_modified" property="whoModified"/>
+        <result column="time_created" property="timeCreated"/>
+        <result column="time_modified" property="timeModified"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		uuid,user_id,role_id, start_time,
+		end_time, creator,
+		who_modified,
+		time_created, time_modified, status
+	</sql>
+    <!-- 查询条件 -->
+    <sql id="Select_Where_Cause">
+        <if test="uuid != null">
+            AND uuid = #{uuid}
+        </if>
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="roleId != null">
+            AND role_id = #{roleId}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND start_time = #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND end_time = #{endTime}
+        </if>
+        <if test="creator != null">
+            AND creator = #{creator,jdbcType=BIGINT}
+        </if>
+        <if test="timeCreated != null">
+            AND time_created = #{timeCreated,jdbcType=TIMESTAMP}
+        </if>
+        <if test="whoModified != null">
+            AND who_modified = #{whoModified,jdbcType=BIGINT}
+        </if>
+        <if test="timeModified != null">
+            AND time_modified = #{timeModified,jdbcType=TIMESTAMP}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </sql>
+
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_user_role
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_auth_user_role
+		where uuid = #{uuid,jdbcType=BIGINT}
+	</delete>
+    <insert id="insert">
+		insert into t_auth_user_role (uuid,user_id,
+		role_id, start_time,
+		end_time, creator, who_modified,
+		time_created, time_modified
+		)
+		values (#{uuid,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
+	    #{roleId,jdbcType=BIGINT},
+		#{startTime,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{creator,jdbcType=VARCHAR},
+		#{whoModified,jdbcType=VARCHAR},
+		#{timeCreated,jdbcType=TIMESTAMP}, #{timeModified,jdbcType=TIMESTAMP}
+		)
+	</insert>
+    <insert id="insertSelective">
+        insert into t_auth_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="whoModified != null">
+                who_modified,
+            </if>
+            <if test="timeCreated != null">
+                time_created,
+            </if>
+            <if test="timeModified != null">
+                time_modified,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="whoModified != null">
+                #{whoModified,jdbcType=VARCHAR},
+            </if>
+            <if test="timeCreated != null">
+                #{timeCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeModified != null">
+                #{timeModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective">
+        update t_auth_user_role
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="whoModified != null">
+                who_modified = #{whoModified,jdbcType=VARCHAR},
+            </if>
+            <if test="timeCreated != null">
+                time_created = #{timeCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeModified != null">
+                time_modified = #{timeModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey">
+		update t_auth_user_role
+		set
+		user_id =#{userId,jdbcType=BIGINT},
+		role_id = #{roleId,jdbcType=BIGINT},
+		start_time =#{startTime,jdbcType=VARCHAR},
+		end_time = #{endTime,jdbcType=VARCHAR},
+		creator = #{creator,jdbcType=VARCHAR},
+		who_modified =
+		#{whoModified,jdbcType=VARCHAR},
+		time_created =
+		#{timeCreated,jdbcType=TIMESTAMP},
+		time_modified =
+		#{timeModified,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=TINYINT}
+		where uuid = #{uuid,jdbcType=BIGINT}
+	</update>
+
+    <!-- 根据条件查询用户角色关系数据集合 -->
+    <select id="selectUserRoleList" resultType="com.zhcx.auth.pojo.AuthUserRole">
+        select
+        ur.uuid,ur.user_id as userId,ur.role_id as roleId, ur.start_time as startTime,r.sys_types as sysTypes,
+        ur.end_time as endTime, ur.creator,
+        ur.who_modified as whoModified,
+        ur.time_created as timeCreated, ur.time_modified as timeModified, ur.status,r.role_name as roleName,
+        u.user_name as createName
+        from t_auth_user_role ur
+        left join t_auth_role r
+        on ur.role_id = r.uuid
+        left join t_auth_user u
+        on ur.user_id = u.uuid
+        <where>
+            1=1
+            <if test="roleId != null">
+                and role_id = #{roleId,jdbcType=BIGINT}
+            </if>
+            <if test="userId != null">
+                and user_id =#{userId,jdbcType=BIGINT}
+            </if>
+
+        </where>
+    </select>
+
+    <!-- 批量插入角色关系数据 -->
+    <insert id="insertBatch">
+        insert into t_auth_user_role (uuid, user_id,
+        role_id, start_time,
+        end_time, creator, who_modified,
+        time_created,
+        time_modified
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.uuid},#{item.userId},
+            #{item.roleId},#{item.startTime},#{item.endTime},#{item.creator},
+            #{item.whoModified},#{item.timeCreated},#{item.timeModified}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 根据条件删除角色关系数据 -->
+    <delete id="deleteUserRole">
+        delete from t_auth_user_role
+        <where>
+            <include refid="Select_Where_Cause"/>
+        </where>
+    </delete>
+    <select id="selectByuser" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AuthUserRole">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_auth_user_role
+        <where>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    <insert id="insertList" parameterType="java.util.List">
+        insert into t_auth_user_role (uuid,user_id,
+        role_id, start_time,
+        end_time, creator, who_modified,
+        time_created, time_modified
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.uuid},
+            #{item.userId},
+            #{item.roleId},
+            #{item.startTime},
+            #{item.endTime},
+            #{item.creator},
+            #{item.whoModified},
+            #{item.timeCreated},
+            #{item.timeModified}
+            )
+        </foreach>
+    </insert>
+</mapper>

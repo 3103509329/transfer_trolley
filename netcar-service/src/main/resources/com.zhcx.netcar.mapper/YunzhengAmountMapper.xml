@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.yunzheng.YunzhengAmountMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.yuzheng.YunzhengAmount">
+    <id column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="busiRegNumber" jdbcType="VARCHAR" property="busiregnumber" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="flage" jdbcType="INTEGER" property="flage" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uuid, company_id, busiRegNumber, amount, type, flage, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yunzheng_amount
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yunzheng_amount
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.yuzheng.YunzhengAmount">
+    insert into yunzheng_amount (uuid, company_id, busiRegNumber, 
+      amount, type, flage, 
+      time)
+    values (#{uuid,jdbcType=BIGINT}, #{companyId,jdbcType=VARCHAR}, #{busiregnumber,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{flage,jdbcType=INTEGER}, 
+      #{time,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunzhengAmount">
+    insert into yunzheng_amount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="busiregnumber != null">
+        busiRegNumber,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="flage != null">
+        flage,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiregnumber != null">
+        #{busiregnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="flage != null">
+        #{flage,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunzhengAmount">
+    update yunzheng_amount
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiregnumber != null">
+        busiRegNumber = #{busiregnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="flage != null">
+        flage = #{flage,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.yuzheng.YunzhengAmount">
+    update yunzheng_amount
+    set company_id = #{companyId,jdbcType=VARCHAR},
+      busiRegNumber = #{busiregnumber,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      flage = #{flage,jdbcType=INTEGER},
+      time = #{time,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByTime" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        yunzheng_amount
+        where
+        busiRegNumber = #{company}
+        and
+        flage = 1
+        <if test="type == 'year'">
+            and
+            DATE_FORMAT(time,'%Y') = #{finalTime}
+        </if>
+        <if test="type == 'month'">
+            and
+            DATE_FORMAT(time,'%Y-%m') = #{finalTime}
+        </if>
+        <if test="type == 'day'">
+            and
+            DATE_FORMAT(time,'%Y-%m-%d') = #{finalTime}
+        </if>
+
+    </select>
+</mapper>

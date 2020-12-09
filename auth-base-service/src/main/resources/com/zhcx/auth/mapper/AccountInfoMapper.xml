@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.AccountInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.AccountInfo">
+        <id column="UUID" property="uuid" jdbcType="BIGINT"/>
+        <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_PWD" property="accountPwd" jdbcType="VARCHAR"/>
+        <result column="SALT" property="salt" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_STATUS" property="accountStatus" jdbcType="VARCHAR"/>
+        <result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="BIGINT"/>
+        <result column="ACCOUNT_TYPE" property="accountType" jdbcType="VARCHAR"/>
+        <result column="KEY_TYPE" property="keyType" jdbcType="VARCHAR"/>
+        <result column="SECRET_KEY" property="secretKey" jdbcType="VARCHAR"/>
+        <result column="PWD_CALL_WAY" property="pwdCallWay" jdbcType="VARCHAR"/>
+        <result column="SECURITY_EMAIL" property="securityEmail" jdbcType="VARCHAR"/>
+        <result column="LAST_EDIT_TIME" property="lastEditTime" jdbcType="VARCHAR"/>
+        <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    UUID, ACCOUNT_NAME, ACCOUNT_STATUS, DEL_FLAG, CREATE_TIME, CREATE_USER_ID, 
+    ACCOUNT_TYPE, KEY_TYPE, SECRET_KEY, PWD_CALL_WAY, SECURITY_EMAIL, LAST_EDIT_TIME, 
+    USER_ID, REMARK,PHONE
+  </sql>
+
+    <sql id="Select_Where_Clause">
+        <if test="uuid != null">
+            and UUID = #{uuid,jdbcType=BIGINT}
+        </if>
+        <if test="accountName != null">
+            and ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR}
+        </if>
+        <if test="accountPwd != null">
+            and ACCOUNT_PWD = #{accountPwd,jdbcType=VARCHAR}
+        </if>
+        <if test="accountStatus != null">
+            and ACCOUNT_STATUS = #{accountStatus,jdbcType=CHAR}
+        </if>
+        <if test="delFlag != null">
+            and DEL_FLAG = #{delFlag,jdbcType=CHAR}
+        </if>
+        <if test="createTime != null">
+            and CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+        </if>
+        <if test="createUserId != null">
+            and CREATE_USER_ID = #{createUserId,jdbcType=BIGINT}
+        </if>
+        <if test="accountType != null">
+            and ACCOUNT_TYPE = #{accountType,jdbcType=CHAR}
+        </if>
+        <if test="keyType != null">
+            and KEY_TYPE = #{keyType,jdbcType=CHAR}
+        </if>
+        <if test="secretKey != null">
+            and SECRET_KEY = #{secretKey,jdbcType=VARCHAR}
+        </if>
+        <if test="pwdCallWay != null">
+            and PWD_CALL_WAY = #{pwdCallWay,jdbcType=CHAR}
+        </if>
+        <if test="securityEmail != null">
+            and SECURITY_EMAIL = #{securityEmail,jdbcType=VARCHAR}
+        </if>
+        <if test="lastEditTime != null">
+            and LAST_EDIT_TIME = #{lastEditTime,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null">
+            and USER_ID = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="remark != null">
+            and REMARK = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and PHONE = #{phone,jdbcType=VARCHAR},
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.zhcx.auth.pojo.AccountInfo">
+    insert into t_account_info (UUID, ACCOUNT_NAME, ACCOUNT_PWD, SALT,
+      ACCOUNT_STATUS, DEL_FLAG, CREATE_TIME, 
+      CREATE_USER_ID, ACCOUNT_TYPE, KEY_TYPE, 
+      SECRET_KEY, PWD_CALL_WAY, SECURITY_EMAIL, 
+      LAST_EDIT_TIME, USER_ID, REMARK,PHONE
+      )
+    values (#{uuid,jdbcType=BIGINT}, #{accountName,jdbcType=VARCHAR}, #{accountPwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{accountStatus,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=BIGINT}, #{accountType,jdbcType=CHAR}, #{keyType,jdbcType=CHAR}, 
+      #{secretKey,jdbcType=VARCHAR}, #{pwdCallWay,jdbcType=CHAR}, #{securityEmail,jdbcType=VARCHAR}, 
+      #{lastEditTime,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <select id="countByExample" parameterType="com.zhcx.auth.pojo.AccountInfo" resultType="java.lang.Integer">
+        select count(uuid) from t_account_info
+        where 1=1
+        <include refid="Select_Where_Clause"/>
+    </select>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AccountInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_info where 1=1
+        <include refid="Select_Where_Clause"/>
+    </select>
+
+    <select id="verifyAccount" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AccountInfo">
+  	select 
+  	t.UUID, t.ACCOUNT_NAME, t.ACCOUNT_PWD, t.SALT,
+      t.ACCOUNT_STATUS, t.DEL_FLAG, t.CREATE_TIME, 
+      t.CREATE_USER_ID, t.ACCOUNT_TYPE, t.KEY_TYPE, 
+      t.SECRET_KEY, t.PWD_CALL_WAY, t.SECURITY_EMAIL, 
+      t.LAST_EDIT_TIME, t.USER_ID, t.REMARK,t.PHONE,t2.user_type as userType,t2.user_status as userStatus
+  	from t_account_info t
+  	LEFT JOIN t_auth_user t2 on t.user_id =t2.uuid
+  	where ACCOUNT_NAME = #{account}
+  </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AccountInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_info
+        where UUID = #{uuid,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByAccountName" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AccountInfo">
+        select
+        t.UUID, t.ACCOUNT_NAME, t.ACCOUNT_PWD, t.SALT,
+        t.ACCOUNT_STATUS, t.DEL_FLAG, t.CREATE_TIME,
+        t.CREATE_USER_ID, t.ACCOUNT_TYPE, t.KEY_TYPE,
+        t.SECRET_KEY, t.PWD_CALL_WAY, t.SECURITY_EMAIL,
+        t.LAST_EDIT_TIME, t.USER_ID, t.REMARK,t.PHONE,t2.user_type as userType,t2.user_status as userStatus,t2.corp_id
+        as corpId,
+        t2.user_name as userName,
+        t2.user_ext1 as userExt1
+        from t_account_info t
+        LEFT JOIN t_auth_user t2 on t.user_id =t2.uuid
+        where 1=1
+        <!-- <if test="accountName != null and accountName != '' " > -->
+        and t.ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR}
+        or t2.user_name = #{accountName,jdbcType=VARCHAR}
+        <!-- </if> -->
+    </select>
+
+    <select id="selectLogineByParam" resultMap="BaseResultMap" parameterType="com.zhcx.auth.pojo.AccountInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_info
+        where 1=1
+        <if test="accountName != null and accountName != '' ">
+            and ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR}
+        </if>
+        <if test="accountPwd != null and accountPwd != ''">
+            and ACCOUNT_PWD = #{accountPwd,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.auth.pojo.AccountInfo">
+        update t_account_info
+        <set>
+            <if test="accountName != null and accountName !='' ">
+                ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountPwd != null and accountPwd !='' ">
+                ACCOUNT_PWD = #{accountPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null and salt !='' ">
+                SALT = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="accountStatus != null and accountStatus !='' ">
+                ACCOUNT_STATUS = #{accountStatus,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null and delFlag !='' ">
+                DEL_FLAG = #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null and createTime !='' ">
+                CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null and createUserId !='' ">
+                CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="accountType != null and accountType !='' ">
+                ACCOUNT_TYPE = #{accountType,jdbcType=CHAR},
+            </if>
+            <if test="keyType != null and keyType !='' ">
+                KEY_TYPE = #{keyType,jdbcType=CHAR},
+            </if>
+            <if test="secretKey != null and secretKey !='' ">
+                SECRET_KEY = #{secretKey,jdbcType=VARCHAR},
+            </if>
+            <if test="pwdCallWay != null and pwdCallWay !='' ">
+                PWD_CALL_WAY = #{pwdCallWay,jdbcType=CHAR},
+            </if>
+            <if test="securityEmail != null and securityEmail !='' ">
+                SECURITY_EMAIL = #{securityEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="lastEditTime != null and lastEditTime !='' ">
+                LAST_EDIT_TIME = #{lastEditTime,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null and userId !='' ">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null and remark !='' ">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null and phone !='' ">
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where 1=1
+        <if test="uuid !=null and uuid != '' ">
+            and UUID = #{uuid,jdbcType=BIGINT}
+        </if>
+        <if test="phone !=null and phone != '' ">
+            and PHONE = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="accountName != null">
+            and ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null and userId !='' ">
+            and USER_ID = #{userId,jdbcType=BIGINT}
+        </if>
+    </update>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  	delete from t_account_info
+  	where UUID = #{uuid,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteAccountByUserId" parameterType="java.lang.Long">
+  	delete from t_account_info
+  	where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+
+</mapper>

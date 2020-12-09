@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.yunzheng.YunZhengDriverMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+        <id column="cardno" jdbcType="VARCHAR" property="cardno"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="nation" jdbcType="VARCHAR" property="nation"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="perdritype" jdbcType="VARCHAR" property="perdritype"/>
+        <result column="dristadate" jdbcType="VARCHAR" property="dristadate"/>
+        <result column="beworscope" jdbcType="VARCHAR" property="beworscope"/>
+        <result column="startdate" jdbcType="VARCHAR" property="startdate"/>
+        <result column="enddate" jdbcType="VARCHAR" property="enddate"/>
+        <result column="gradate" jdbcType="VARCHAR" property="gradate"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="flage" jdbcType="INTEGER" property="flage"/>
+        <result column="busiRegNumber" jdbcType="VARCHAR" property="busiregnumber"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    cardno, name, sex, nation, address, birthday, perdritype, dristadate, beworscope, startdate,
+    enddate, gradate, time, flage, busiRegNumber
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yunzheng_base_info_driver
+        where cardno = #{cardno,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yunzheng_base_info_driver
+    where cardno = #{cardno,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+    insert into yunzheng_base_info_driver (cardno, name, sex,
+      nation, address, birthday,
+      perdritype, dristadate, beworscope, startdate,
+      enddate, gradate, time,
+      flage, busiRegNumber)
+    values (#{cardno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{nation,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR},
+      #{perdritype,jdbcType=VARCHAR}, #{dristadate,jdbcType=VARCHAR}, #{beworscope,jdbcType=VARCHAR}, #{startdate,jdbcType=VARCHAR},
+      #{enddate,jdbcType=VARCHAR}, #{gradate,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR},
+      #{flage,jdbcType=INTEGER}, #{busiregnumber,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+        insert into yunzheng_base_info_driver
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cardno != null">
+                cardno,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="perdritype != null">
+                perdritype,
+            </if>
+            <if test="dristadate != null">
+                dristadate,
+            </if>
+            <if test="beworscope != null">
+                beworscope,
+            </if>
+            <if test="startdate != null">
+                startdate,
+            </if>
+            <if test="enddate != null">
+                enddate,
+            </if>
+            <if test="gradate != null">
+                gradate,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="flage != null">
+                flage,
+            </if>
+            <if test="busiregnumber != null">
+                busiRegNumber,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cardno != null">
+                #{cardno,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="perdritype != null">
+                #{perdritype,jdbcType=VARCHAR},
+            </if>
+            <if test="dristadate != null">
+                #{dristadate,jdbcType=VARCHAR},
+            </if>
+            <if test="beworscope != null">
+                #{beworscope,jdbcType=VARCHAR},
+            </if>
+            <if test="startdate != null">
+                #{startdate,jdbcType=VARCHAR},
+            </if>
+            <if test="enddate != null">
+                #{enddate,jdbcType=VARCHAR},
+            </if>
+            <if test="gradate != null">
+                #{gradate,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="flage != null">
+                #{flage,jdbcType=INTEGER},
+            </if>
+            <if test="busiregnumber != null">
+                #{busiregnumber,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+        update yunzheng_base_info_driver
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="perdritype != null">
+                perdritype = #{perdritype,jdbcType=VARCHAR},
+            </if>
+            <if test="dristadate != null">
+                dristadate = #{dristadate,jdbcType=VARCHAR},
+            </if>
+            <if test="beworscope != null">
+                beworscope = #{beworscope,jdbcType=VARCHAR},
+            </if>
+            <if test="startdate != null">
+                startdate = #{startdate,jdbcType=VARCHAR},
+            </if>
+            <if test="enddate != null">
+                enddate = #{enddate,jdbcType=VARCHAR},
+            </if>
+            <if test="gradate != null">
+                gradate = #{gradate,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="flage != null">
+                flage = #{flage,jdbcType=INTEGER},
+            </if>
+            <if test="busiregnumber != null">
+                busiRegNumber = #{busiregnumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where cardno = #{cardno,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+    update yunzheng_base_info_driver
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      perdritype = #{perdritype,jdbcType=VARCHAR},
+      dristadate = #{dristadate,jdbcType=VARCHAR},
+      beworscope = #{beworscope,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=VARCHAR},
+      gradate = #{gradate,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      flage = #{flage,jdbcType=INTEGER},
+      busiRegNumber = #{busiregnumber,jdbcType=VARCHAR}
+    where cardno = #{cardno,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectCountByCompanyId" parameterType="map" resultType="long">
+        select
+        count(1)
+        from t_base_info_empl t1
+        <where>
+            <!--            t1.source = 4-->
+            <!--            and-->
+            t1.empl_type = 4
+            <if test="companyId != null">
+                and
+                t1.company_id = #{companyId}
+            </if>
+            and t1.company_id != ''
+        </where>
+    </select>
+
+    <select
+            id="selectByNameOrLicenseId" parameterType="map" resultMap="BaseResultMapExtend">
+        select
+        t1.idc_num as cardno,
+        t1.name as NAME,
+        t1.gender as sex,
+        t1.nation_code as nation,
+        t1.present_addr as address,
+        t1.birth_date as birthday,
+        t1.driver_type as perdritype,
+        t1.get_driver_license_date as dristadate,
+        '' as beworscope,
+        t1.get_network_car_proof_date as startdate,
+        t1.network_car_proof_off as enddate,
+        t1.network_car_proof_on as gradate,
+        t1.phone_no as driverPhone,
+        t2.company_name as companyName
+        from t_base_info_empl t1 LEFT JOIN t_base_info_company t2
+        ON t1.company_id = t2.company_id
+        <where>
+            t1.empl_type = 4
+            <if test="busiRegNumber != null and busiRegNumber != ''">
+                and t2.identifier = #{busiRegNumber}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and
+                (
+                name LIKE CONCAT('%', #{keyword}, '%')
+                OR idc_num LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+
+
+    </select>
+    <resultMap id="BaseResultMapExtend" type="com.zhcx.netcar.pojo.yuzheng.YunZhengDriver">
+        <result column="clitname" jdbcType="VARCHAR" property="clitname"/>
+        <result column="companyName" jdbcType="VARCHAR" property="companyName"/>
+        <result column="startdate" jdbcType="VARCHAR" property="startdate"/>
+        <result column="enddate" jdbcType="VARCHAR" property="enddate"/>
+        <result column="gradate" jdbcType="VARCHAR" property="gradate"/>
+    </resultMap>
+
+</mapper>

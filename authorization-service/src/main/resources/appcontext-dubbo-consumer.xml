@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:consumer timeout="100000" />
+
+	<dubbo:reference id="demoService"  check="false" interface="com.zhcx.basicdata.facade.demo.DemoService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="authUserService"  check="false" interface="com.zhcx.auth.facade.AuthUserService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="accountInfoService"  check="false" interface="com.zhcx.auth.facade.AccountInfoService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="authMenuService"  check="false" interface="com.zhcx.auth.facade.AuthMenuService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="authMenuRelationService"  check="false" interface="com.zhcx.auth.facade.AuthMenuRelationService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="authRoleService"  check="false" interface="com.zhcx.auth.facade.AuthRoleService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="authUserRoleService"  check="false" interface="com.zhcx.auth.facade.AuthUserRoleService" version="${basic.dubbo.version}"/>
+
+	<dubbo:reference id="companyService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyService" version="${basic.dubbo.version}"/>
+	<dubbo:reference id="companyStatService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyStatService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="companyFareService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyFareService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="companyPayService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyPayService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="companyPermitService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyPermitService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="companyServiceService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.CompanyServiceService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="passengerService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.PassengerService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="paxiNetOderService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiNetOderService" version="${basic.dubbo.version}"/>
+
+
+
+    <dubbo:reference id="dictionaryService"  check="false" interface="com.zhcx.basicdata.facade.base.BaseDictionaryService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiBaseInfoVehicleService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiBaseInfoVehicleService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiBaseInfoTerminalService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiBaseInfoTerminalService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiTermianlVehicleService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiTermianlVehicleService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiBaseInfoDriverService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiBaseInfoDriverService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiBaseInfoCompanyService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiBaseInfoCompanyService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiBaseInfoSimService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiBaseInfoSimService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiVehicleSimService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiVehicleSimService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiViolateRecordService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiViolateRecordService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiViolateRecordServiceSub" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiViolateRecordSubService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiTextScheduleService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiTextScheduleService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiAlarmInfoService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiAlarmInfoService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiIndustrySituationService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiIndustrySituationService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiTtsRecordService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiTtsRecordService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiCheckInOutService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiCheckInOutService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiDispatchPlanService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiDispatchPlanService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiDispatchLocationService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiDispatchLocationService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiDispatchTaskService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiDispatchTaskService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiMileageService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiMileageService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiOrderReportService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiOrderReportService" version="${basic.dubbo.version}"/>
+
+	<dubbo:reference id="taxiPhoneBookService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiPhoneBookService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiCarMonitorTaskService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiCarMonitorTaskService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiMonitorTaskService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiMonitorTaskService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiOperationLogService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiOperationLogService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="kafkaResultTaxiOnofflineService" check="false" interface="com.zhcx.basicdata.facade.taxi.KafkaResultTaxiOnofflineService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiAlarmBlackListService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiAlarmBlackListService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="taxiAlarmLogService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiAlarmLogService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="taxiNetOderService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiNetOderService" version="${basic.dubbo.version}"/>
+
+    <!--出租车信誉管理-->
+    <dubbo:reference id="creditBehaviorService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditBehaviorService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditWarningService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditWarningService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditRatingService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditRatingService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditIndicatorItemService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditIndicatorItemService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditIndicatorClassifyService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditIndicatorClassifyService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditEnterpriseEvaluationService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditEnterpriseEvaluationService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditEnterpriseEvaluationRealtimeService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditEnterpriseEvaluationRealtimeService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditDriverEvaluationService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditDriverEvaluationService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="creditDriverEvaluationRealtimeService" check="false" interface="com.zhcx.basicdata.facade.taxi.CreditDriverEvaluationRealtimeService" version="${basic.dubbo.version}"/>
+
+
+    <!-- 网约车大屏车辆上下线数量 -->
+    <dubbo:reference id="netcarOnOffLineService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.NetcarOnOffLineService" version="${basic.dubbo.version}"/>
+
+    <!--network-->
+<!--     <dubbo:reference id="onLineService"  check="false" interface="com.zhcx.network.facade.OnLineService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="gpsService"  check="false" interface="com.zhcx.network.facade.GpsService" version="${basic.dubbo.version}"/>
+    -->
+
+
+
+
+
+
+    <dubbo:reference id="baseDictionaryService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.BaseDictionaryService" version="${basic.dubbo.version}"/>
+
+
+
+    <dubbo:reference id="driverAppService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.DriverAppService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="driverEducateService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.DriverEducateService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="driverService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.DriverService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="driverStatService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.DriverStatService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="vehicleInsuranceService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.VehicleInsuranceService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="vehicleService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.VehicleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="vehicleTotalMileService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.VehicleTotalMileService" version="${basic.dubbo.version}"/>
+
+    <!--运政-->
+    <dubbo:reference id="yunZhengCompanyService"  check="false" interface="com.zhcx.platformtonet.facade.YunZhengCompanyService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="yunZhengDriverService"  check="false" interface="com.zhcx.platformtonet.facade.YunZhengDriverService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="yunZhengVehicleService"  check="false" interface="com.zhcx.platformtonet.facade.YunZhengVehicleService" version="${basic.dubbo.version}"/>
+
+
+    <!--差异比对-->
+    <!--<dubbo:reference id="differenceService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.DifferenceService" version="${basic.dubbo.version}"/>-->
+
+
+
+
+    <!-- 运营监管接口 -->
+    <dubbo:reference id="ratedPassengerService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.RatedPassengerService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="ratedPassengerComplaintService"  check="false" interface="com.zhcx.netcarbasic.facade.netcar.RatedPassengerComplaintService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="ratedDriverPunishService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.RatedDriverPunishService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="ratedDriverService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.RatedDriverService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="shareCompanyService " check="false" interface="com.zhcx.netcarbasic.facade.netcar.ShareCompanyService " version="${basic.dubbo.version}"/>
+    <dubbo:reference id="orderService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.OrderService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="operateService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.OperateService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="shareService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.ShareService" version="${basic.dubbo.version}"/>
+
+    <!--区域监控配置及电子围栏-->
+    <dubbo:reference id="monitorAssembleRuleSerivce" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorAssembleRuleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="monitorKeyRuleSerivce" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorKeyRuleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="monitorOperateRuleService" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorOperateRuleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="monitorParkingRuleService" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorParkingRuleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="regionMonitorAssembleService" check="false" interface="com.zhcx.regionmonitor.monitor.RegionMonitorAssembleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="regionMonitorOperateService" check="false" interface="com.zhcx.regionmonitor.monitor.RegionMonitorOperateService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="regionMonitorParkingService" check="false" interface="com.zhcx.regionmonitor.monitor.RegionMonitorParkingService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="regionMonitorSearchService" check="false" interface="com.zhcx.regionmonitor.monitor.RegionMonitorSearchService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="monitorCapacityRuleService" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorCapacityRuleService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="monitorCompanyService" check="false" interface="com.zhcx.regionmonitor.monitor.MonitorCompanyService" version="${basic.dubbo.version}"/>
+    <!--区域监控看板历史记录查询（报警记录）-->
+    <dubbo:reference id="monitoringHistoryService" check="false" interface="com.zhcx.regionmonitor.monitor.MonitoringHistoryService" version="${basic.dubbo.version}"/>
+
+
+    <!--网约车TaxiInformationDelivery-->
+    <dubbo:reference id="positionService" check="false" interface="com.zhcx.netcarbasic.facade.netcar.PositionService" version="${basic.dubbo.version}"/>
+
+    <!-- 订单统计 -->
+    <dubbo:reference id="taxiOrderStatisticService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiOrderStatisticService" version="${basic.dubbo.version}"/>
+
+
+    <dubbo:reference id="taxiAlarmOperateService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiAlarmOperateService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="taxiComplaintService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiComplaintService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="taxiLostObjectSearchService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiLostObjectSearchService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="taxiLostSearchAttachService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiLostSearchAttachService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="taxiLostSearchAreaService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiLostSearchAreaService" version="${basic.dubbo.version}"/>
+
+    <!--消息发布-->
+    <dubbo:reference id="taxiInformationDeliveryService" check="false" interface="com.zhcx.basicdata.facade.taxi.TaxiInformationDeliveryService" version="${basic.dubbo.version}"/>
+
+    <!--预约消息定时任务-->
+    <dubbo:reference interface="com.zhcx.basicdata.facade.taxi.TaxiInformationDeliveryTaskService" check="false" id="taxiInformationDeliveryTaskService"  version="${basic.dubbo.version}"/>
+
+
+    <!--驾驶员信息审核相关-->
+    <dubbo:reference id="taxiBaseInfoDriverExamineService" check="false" interface="com.zhcx.regionmonitor.examine.TaxiBaseInfoDriverExamineService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="publisherService" check="false" interface="com.zhcx.regionmonitor.examine.PublisherService" version="${basic.dubbo.version}"/>
+
+
+
+
+    <!--网约车门户网站-->
+    <dubbo:reference id="permitCompanyService" check="false" interface="com.zhcx.platformtonet.facade.PermitCompanyService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="permitDriverService" check="false" interface="com.zhcx.platformtonet.facade.PermitDriverService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="permitVehicleService" check="false" interface="com.zhcx.platformtonet.facade.PermitVehicleService" version="${basic.dubbo.version}"/>
+
+    <dubbo:reference id="newsService" check="false" interface="com.zhcx.platformtonet.facade.NewsService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="examBookService" check="false" interface="com.zhcx.platformtonet.facade.ExamBookService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="examinationService" check="false" interface="com.zhcx.platformtonet.facade.ExaminationService" version="${basic.dubbo.version}"/>
+    <dubbo:reference id="portalAccountService" check="false" interface="com.zhcx.platformtonet.facade.PortalAccountService" version="${basic.dubbo.version}"/>
+
+     <!--工作台-->
+    <dubbo:reference id="workbenchService" check="false" interface="com.zhcx.platformtonet.facade.workbench.WorkbenchService" version="${basic.dubbo.version}" timeout="300000"/>
+
+    <!--登陆操作日志-->
+    <dubbo:reference id="operationLogService" check="false" interface="com.zhcx.netcarbasic.facade.base.OperationLogService" version="${basic.dubbo.version}"/>
+
+    <!--apk安装包上传和下载-->
+    <dubbo:reference id="configurationUpgradeService" check="false" interface="com.zhcx.platformtonet.facade.ConfigurationUpgradeService" version="${basic.dubbo.version}"/>
+
+    <!--统计分析-->
+    <dubbo:reference id="statisticalService" check="false" interface="com.zhcx.platformtonet.facade.statistical.StatisticalService" version="${basic.dubbo.version}"/>
+
+    <!--网约车kafka流处理-->
+    <dubbo:reference id="streamService" check="false" interface="com.zhcx.netcarbasic.facade.kafka.StreamService" version="${basic.dubbo.version}"/>
+
+    <!--app交通考核-->
+    <dubbo:reference id="trafficAssessmentService" check="false" interface="com.zhcx.platformtonet.facade.TrafficAssessmentService" version="${basic.dubbo.version}"/>
+
+    <!--获取指定时间内的车辆总数-->
+    <dubbo:reference id="yunzhengAmountService" check="false" interface="com.zhcx.platformtonet.facade.YunzhengAmountService" version="${basic.dubbo.version}"/>
+
+</beans>

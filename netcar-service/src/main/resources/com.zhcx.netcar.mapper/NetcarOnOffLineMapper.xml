@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarOnOffLineMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarOnOffLine">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="ACTIVE" jdbcType="INTEGER" property="active"/>
+        <result column="EVENT_TIME" jdbcType="TIMESTAMP" property="eventTime"/>
+        <result column="LICENSEID" jdbcType="VARCHAR" property="licenseid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, ACTIVE, EVENT_TIME, LICENSEID
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from kafka_result_netcar_onoffline
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kafka_result_netcar_onoffline
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarOnOffLine">
+    insert into kafka_result_netcar_onoffline (ID, ACTIVE, EVENT_TIME, 
+      LICENSEID)
+    values (#{id,jdbcType=VARCHAR}, #{active,jdbcType=INTEGER}, #{eventTime,jdbcType=TIMESTAMP}, 
+      #{licenseid,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOnOffLine">
+        insert into kafka_result_netcar_onoffline
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="active != null">
+                ACTIVE,
+            </if>
+            <if test="eventTime != null">
+                EVENT_TIME,
+            </if>
+            <if test="licenseid != null">
+                LICENSEID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="active != null">
+                #{active,jdbcType=INTEGER},
+            </if>
+            <if test="eventTime != null">
+                #{eventTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="licenseid != null">
+                #{licenseid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOnOffLine">
+        update kafka_result_netcar_onoffline
+        <set>
+            <if test="active != null">
+                ACTIVE = #{active,jdbcType=INTEGER},
+            </if>
+            <if test="eventTime != null">
+                EVENT_TIME = #{eventTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="licenseid != null">
+                LICENSEID = #{licenseid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarOnOffLine">
+    update kafka_result_netcar_onoffline
+    set ACTIVE = #{active,jdbcType=INTEGER},
+      EVENT_TIME = #{eventTime,jdbcType=TIMESTAMP},
+      LICENSEID = #{licenseid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="getNetcarOnOffLineList" resultMap="BaseResultMap" parameterType="java.util.List">
+        select
+        <include refid="Base_Column_List"/>
+        from kafka_result_netcar_onoffline
+        WHERE ID IN
+        <foreach collection="vehicleNoList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <delete id="deleteLogIn" parameterType="com.zhcx.netcar.pojo.base.NetcarOperateLogin">
+      delete from
+        kafka_result_netcar_onoffline
+      where
+         LICENSEID = #{licenseId,jdbcType=VARCHAR}
+         or
+         ID = #{vehicleNo,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insertLogIn" parameterType="com.zhcx.netcar.pojo.base.NetcarOperateLogin">
+        insert into kafka_result_netcar_onoffline
+        (ID, ACTIVE, EVENT_TIME, LICENSEID)
+        values (#{vehicleNo,jdbcType=VARCHAR}, 1,str_to_date( #{loginTime}, '%Y%m%d%H%i%s' ),
+                #{licenseId,jdbcType=VARCHAR})
+    </insert>
+    <delete id="deleteLogOut" parameterType="com.zhcx.netcar.pojo.base.NetcarOperateLogout">
+      delete from
+        kafka_result_netcar_onoffline
+      where
+         LICENSEID = #{licenseId,jdbcType=VARCHAR}
+         or
+         ID = #{vehicleNo,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insertLogOut" parameterType="com.zhcx.netcar.pojo.base.NetcarOperateLogout">
+        insert into kafka_result_netcar_onoffline
+        (ID, ACTIVE, EVENT_TIME, LICENSEID)
+        values (#{vehicleNo,jdbcType=VARCHAR}, 0,str_to_date( #{logoutTime}, '%Y%m%d%H%i%s' ),
+                #{licenseId,jdbcType=VARCHAR})
+    </insert>
+
+
+
+
+
+    <sql id="login_Column_List">
+    company_id, license_id, vehicle_no, login_time, longitude, latitude, encrypt, reserved
+  </sql>
+    <select id="queryloginoutVehicleNo" resultType="com.zhcx.netcar.pojo.base.NetcarOperateLogin"
+            parameterType="com.zhcx.netcar.params.QueryParam">
+        SELECT
+         company_id as companyId, license_id as licebseId, vehicle_no as vehicleNo, login_time as loginTime, longitude, latitude, encrypt, reserved, type
+        FROM
+	        (
+	            SELECT
+                    a.company_id AS company_id,
+                    a.license_id AS license_id,
+                    a.vehicle_no AS vehicle_no,
+                    a.login_time AS login_time,
+                    a.longitude AS longitude,
+                    a.latitude AS latitude,
+                    a.encrypt AS encrypt,
+                    a.reserved AS reserved,
+                    '1' as type
+                FROM
+		            netcar_operate_login a
+		        where
+		            a.vehicle_no = #{keyword}
+		        UNION ALL
+	            SELECT
+		            b.company_id AS company_id,
+		            b.license_id AS license_id,
+		            b.vehicle_no AS vehicle_no,
+		            b.logout_time AS login_time,
+		            b.longitude AS longitude,
+		            b.latitude AS latitude,
+		            b.encrypt AS encrypt,
+		            b.reserved AS reserved,
+                    '0'  as type
+	            FROM
+		            netcar_operate_logout b
+		        where
+		            b.vehicle_no = #{keyword}
+	        ) c
+        ORDER BY
+	    login_time
+    </select>
+</mapper>

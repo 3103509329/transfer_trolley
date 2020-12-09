@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarPermitDriverInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.app.NetcarPermitDriverInfo">
+    <id column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="corp_id" jdbcType="BIGINT" property="corpId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="handler" jdbcType="VARCHAR" property="handler" />
+    <result column="handler_phone" jdbcType="VARCHAR" property="handlerPhone" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
+    <result column="driver_id_card" jdbcType="VARCHAR" property="driverIdCard" />
+    <result column="driver_phone" jdbcType="VARCHAR" property="driverPhone" />
+    <result column="driver_gender" jdbcType="VARCHAR" property="driverGender" />
+    <result column="driver_birthday" jdbcType="DATE" property="driverBirthday" />
+    <result column="driver_nationality" jdbcType="VARCHAR" property="driverNationality" />
+    <result column="driver_nation" jdbcType="VARCHAR" property="driverNation" />
+    <result column="photo_id" jdbcType="VARCHAR" property="photoId" />
+    <result column="license_id" jdbcType="VARCHAR" property="licenseId" />
+    <result column="license_photo_id" jdbcType="VARCHAR" property="licensePhotoId" />
+    <result column="driver_type" jdbcType="VARCHAR" property="driverType" />
+    <result column="get_driver_license_date" jdbcType="DATE" property="getDriverLicenseDate" />
+    <result column="driver_license_off" jdbcType="DATE" property="driverLicenseOff" />
+    <result column="driver_license_on" jdbcType="DATE" property="driverLicenseOn" />
+    <result column="commercial_type" jdbcType="INTEGER" property="commercialType" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="domain" jdbcType="VARCHAR" property="domain" />
+    <result column="file_names" jdbcType="VARCHAR" property="fileNames" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uuid, corp_id, company_name, handler, handler_phone, address, driver_name, driver_id_card, 
+    driver_phone, driver_gender, driver_birthday, driver_nationality, driver_nation, 
+    photo_id, license_id, license_photo_id, driver_type, get_driver_license_date, driver_license_off, 
+    driver_license_on, commercial_type, flag, update_time, create_time, creator, modifier, 
+    reason, status, domain, file_names
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_permit_driver_info
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from netcar_permit_driver_info
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.app.NetcarPermitDriverInfo">
+    insert into netcar_permit_driver_info (uuid, corp_id, company_name, 
+      handler, handler_phone, address, 
+      driver_name, driver_id_card, driver_phone, 
+      driver_gender, driver_birthday, driver_nationality, 
+      driver_nation, photo_id, license_id, 
+      license_photo_id, driver_type, get_driver_license_date, 
+      driver_license_off, driver_license_on, commercial_type, 
+      flag, update_time, create_time, 
+      creator, modifier, reason, 
+      status, domain, file_names
+      )
+    values (#{uuid,jdbcType=BIGINT}, #{corpId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, 
+      #{handler,jdbcType=VARCHAR}, #{handlerPhone,jdbcType=VARCHAR}, #{address,jdbcType=INTEGER}, 
+      #{driverName,jdbcType=VARCHAR}, #{driverIdCard,jdbcType=VARCHAR}, #{driverPhone,jdbcType=VARCHAR}, 
+      #{driverGender,jdbcType=VARCHAR}, #{driverBirthday,jdbcType=DATE}, #{driverNationality,jdbcType=VARCHAR}, 
+      #{driverNation,jdbcType=VARCHAR}, #{photoId,jdbcType=VARCHAR}, #{licenseId,jdbcType=VARCHAR}, 
+      #{licensePhotoId,jdbcType=VARCHAR}, #{driverType,jdbcType=VARCHAR}, #{getDriverLicenseDate,jdbcType=DATE}, 
+      #{driverLicenseOff,jdbcType=DATE}, #{driverLicenseOn,jdbcType=DATE}, #{commercialType,jdbcType=INTEGER}, 
+      #{flag,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{domain,jdbcType=VARCHAR}, #{fileNames,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.app.NetcarPermitDriverInfo">
+    insert into netcar_permit_driver_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="corpId != null">
+        corp_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="handler != null">
+        handler,
+      </if>
+      <if test="handlerPhone != null">
+        handler_phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="driverName != null">
+        driver_name,
+      </if>
+      <if test="driverIdCard != null">
+        driver_id_card,
+      </if>
+      <if test="driverPhone != null">
+        driver_phone,
+      </if>
+      <if test="driverGender != null">
+        driver_gender,
+      </if>
+      <if test="driverBirthday != null">
+        driver_birthday,
+      </if>
+      <if test="driverNationality != null">
+        driver_nationality,
+      </if>
+      <if test="driverNation != null">
+        driver_nation,
+      </if>
+      <if test="photoId != null">
+        photo_id,
+      </if>
+      <if test="licenseId != null">
+        license_id,
+      </if>
+      <if test="licensePhotoId != null">
+        license_photo_id,
+      </if>
+      <if test="driverType != null">
+        driver_type,
+      </if>
+      <if test="getDriverLicenseDate != null">
+        get_driver_license_date,
+      </if>
+      <if test="driverLicenseOff != null">
+        driver_license_off,
+      </if>
+      <if test="driverLicenseOn != null">
+        driver_license_on,
+      </if>
+      <if test="commercialType != null">
+        commercial_type,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="fileNames != null">
+        file_names,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="corpId != null">
+        #{corpId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPhone != null">
+        #{handlerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null">
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverIdCard != null">
+        #{driverIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverGender != null">
+        #{driverGender,jdbcType=VARCHAR},
+      </if>
+      <if test="driverBirthday != null">
+        #{driverBirthday,jdbcType=DATE},
+      </if>
+      <if test="driverNationality != null">
+        #{driverNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNation != null">
+        #{driverNation,jdbcType=VARCHAR},
+      </if>
+      <if test="photoId != null">
+        #{photoId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhotoId != null">
+        #{licensePhotoId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null">
+        #{driverType,jdbcType=VARCHAR},
+      </if>
+      <if test="getDriverLicenseDate != null">
+        #{getDriverLicenseDate,jdbcType=DATE},
+      </if>
+      <if test="driverLicenseOff != null">
+        #{driverLicenseOff,jdbcType=DATE},
+      </if>
+      <if test="driverLicenseOn != null">
+        #{driverLicenseOn,jdbcType=DATE},
+      </if>
+      <if test="commercialType != null">
+        #{commercialType,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNames != null">
+        #{fileNames,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.app.NetcarPermitDriverInfo">
+    update netcar_permit_driver_info
+    <set>
+      <if test="corpId != null">
+        corp_id = #{corpId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        handler = #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPhone != null">
+        handler_phone = #{handlerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null">
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverIdCard != null">
+        driver_id_card = #{driverIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverGender != null">
+        driver_gender = #{driverGender,jdbcType=VARCHAR},
+      </if>
+      <if test="driverBirthday != null">
+        driver_birthday = #{driverBirthday,jdbcType=DATE},
+      </if>
+      <if test="driverNationality != null">
+        driver_nationality = #{driverNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNation != null">
+        driver_nation = #{driverNation,jdbcType=VARCHAR},
+      </if>
+      <if test="photoId != null">
+        photo_id = #{photoId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        license_id = #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhotoId != null">
+        license_photo_id = #{licensePhotoId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null">
+        driver_type = #{driverType,jdbcType=VARCHAR},
+      </if>
+      <if test="getDriverLicenseDate != null">
+        get_driver_license_date = #{getDriverLicenseDate,jdbcType=DATE},
+      </if>
+      <if test="driverLicenseOff != null">
+        driver_license_off = #{driverLicenseOff,jdbcType=DATE},
+      </if>
+      <if test="driverLicenseOn != null">
+        driver_license_on = #{driverLicenseOn,jdbcType=DATE},
+      </if>
+      <if test="commercialType != null">
+        commercial_type = #{commercialType,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNames != null">
+        file_names = #{fileNames,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.app.NetcarPermitDriverInfo">
+    update netcar_permit_driver_info
+    set corp_id = #{corpId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      handler = #{handler,jdbcType=VARCHAR},
+      handler_phone = #{handlerPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=INTEGER},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      driver_id_card = #{driverIdCard,jdbcType=VARCHAR},
+      driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      driver_gender = #{driverGender,jdbcType=VARCHAR},
+      driver_birthday = #{driverBirthday,jdbcType=DATE},
+      driver_nationality = #{driverNationality,jdbcType=VARCHAR},
+      driver_nation = #{driverNation,jdbcType=VARCHAR},
+      photo_id = #{photoId,jdbcType=VARCHAR},
+      license_id = #{licenseId,jdbcType=VARCHAR},
+      license_photo_id = #{licensePhotoId,jdbcType=VARCHAR},
+      driver_type = #{driverType,jdbcType=VARCHAR},
+      get_driver_license_date = #{getDriverLicenseDate,jdbcType=DATE},
+      driver_license_off = #{driverLicenseOff,jdbcType=DATE},
+      driver_license_on = #{driverLicenseOn,jdbcType=DATE},
+      commercial_type = #{commercialType,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      domain = #{domain,jdbcType=VARCHAR},
+      file_names = #{fileNames,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectPermitDriverInfoList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from netcar_permit_driver_info
+        <where>
+            and status = 1
+            <if test="corpId != null">
+                and corp_id = #{corpId}
+            </if>
+            <if test="flag != null">
+                and flag = #{flag}
+            </if>
+            <if test="keyword != null">
+                and
+                (
+                driver_name like concat('%',#{keyword},'%')
+                or
+                driver_id_card like concat('%',#{keyword},'%')
+                or
+                company_name like concat('%',#{keyword},'%')
+                or
+                handler like concat('%',#{keyword},'%')
+                or
+                address like concat('%',#{keyword},'%')
+                or
+                handler_phone like concat('%',#{keyword},'%')
+                )
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

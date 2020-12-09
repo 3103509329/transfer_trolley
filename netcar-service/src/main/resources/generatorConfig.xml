@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="application-dev.properties" />
+	<!-- <classPathEntry location="D:/ZK/Tool/mvn-repository/com/oracle/ojdbc6/11.2.0.3/ojdbc6-11.2.0.3.jar" /> -->
+	<classPathEntry  location="D:/build/maven-m2/repository/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar"/>  
+	<context id="qr-cxpay" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+		
+		<!-- 通过自定义插件类生成自定义注解和接口 -->
+		<!-- <plugin type="com.zhcx.cxpay.utils.GenPlugin">
+			<property name="javaFileEncoding" value="UTF-8"/>
+			<property name="mappers" value="com.zhcx.cxpay.mapper.BaseMapper" />
+		</plugin> -->
+		<commentGenerator>
+			
+			
+			<!-- 是否生成注释代时间戳 -->
+			<property name="suppressDate" value="true" />
+			<!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<!-- <commentGenerator type="com.zhcx.onecard.config.MyCommentGenerator">
+		<property name="javaFileEncoding" value="UTF-8"/>
+		</commentGenerator> -->
+
+		<!-- jdbc连接 -->
+		<jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+			connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}"
+			password="${spring.datasource.password}">
+			<!-- 针对mysql数据库 使用字段注释 -->
+			<!-- <property name="useInformationSchema" value="true"></property> -->
+		</jdbcConnection>
+
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类地址 -->
+		<javaModelGenerator targetPackage="com.zhcx.netcar.base"
+			targetProject="netcar-interface\src\main\java">
+			<property name="constructorBased" value="true" />
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>		
+
+		<!-- 生成mapxml文件 -->
+		<sqlMapGenerator targetPackage="com.zhcx.netcar.netcarservice.mapper" targetProject="netcar-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true"/>  
+		</sqlMapGenerator>	 
+		
+		<!-- 生成mapxml对应client，也就是接口dao -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.zhcx.netcar.netcarservice.mapper" targetProject="netcar-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true"/>  
+		</javaClientGenerator>	
+
+		<!-- 配置表信息 -->
+		 <!-- <table schema="ONECARD" tableName="ZHCX_ONECARD_ORGANIZATION"
+			domainObjectName="Organization" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false">
+			<property name="constructorBased" value="true" />
+			<property name="useActualColumnNames" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+
+		</table> -->
+		<!--<table schema="ONECARD" tableName="ZHCX_ONECARD_XF_PERIOD"
+			domainObjectName="XfPeriod" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false">
+			<property name="constructorBased" value="true" />
+			<property name="useActualColumnNames" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+
+		</table>-->
+
+		<!--<table schema="ONECARD" tableName="ZHCX_ONECARD_FB_SEGMENT"
+			   domainObjectName="FbSegment" enableCountByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   enableUpdateByExample="false">
+			<property name="constructorBased" value="true" />
+			<property name="useActualColumnNames" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+
+		</table>-->
+
+<!--		<table schema="authorization_db" tableName="t_user_role_ref"-->
+<!--			   domainObjectName="UserRoleRef" enableCountByExample="false"-->
+<!--			   enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--			   enableUpdateByExample="false">-->
+<!--			<property name="constructorBased" value="true" />-->
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			<property name="ignoreQualifiersAtRuntime" value="true" />-->
+
+<!--		</table>-->
+
+	</context>
+</generatorConfiguration>

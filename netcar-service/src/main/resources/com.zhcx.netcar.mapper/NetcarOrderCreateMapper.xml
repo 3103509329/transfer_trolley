@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarOrderCreateMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarOrderCreate">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="address" jdbcType="INTEGER" property="address" />
+    <result column="depart_time" jdbcType="VARCHAR" property="departTime" />
+    <result column="order_time" jdbcType="VARCHAR" property="orderTime" />
+    <result column="passenger_note" jdbcType="VARCHAR" property="passengerNote" />
+    <result column="departure" jdbcType="VARCHAR" property="departure" />
+    <result column="dep_longitude" jdbcType="DOUBLE" property="depLongitude" />
+    <result column="dep_latitude" jdbcType="DOUBLE" property="depLatitude" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="dest_longitude" jdbcType="DOUBLE" property="destLongitude" />
+    <result column="dest_latitude" jdbcType="DOUBLE" property="destLatitude" />
+    <result column="encrypt" jdbcType="INTEGER" property="encrypt" />
+    <result column="fare_type" jdbcType="VARCHAR" property="fareType" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, order_id, address, depart_time, order_time, passenger_note, departure, 
+    dep_longitude, dep_latitude, destination, dest_longitude, dest_latitude, encrypt, 
+    fare_type, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netcar_order_create
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_order_create
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarOrderCreate">
+    insert into netcar_order_create (company_id, order_id, address, 
+      depart_time, order_time, passenger_note, 
+      departure, dep_longitude, dep_latitude, 
+      destination, dest_longitude, dest_latitude, 
+      encrypt, fare_type, reserved
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{address,jdbcType=INTEGER}, 
+      #{departTime,jdbcType=VARCHAR}, #{orderTime,jdbcType=VARCHAR}, #{passengerNote,jdbcType=VARCHAR}, 
+      #{departure,jdbcType=VARCHAR}, #{depLongitude,jdbcType=DOUBLE}, #{depLatitude,jdbcType=DOUBLE}, 
+      #{destination,jdbcType=VARCHAR}, #{destLongitude,jdbcType=DOUBLE}, #{destLatitude,jdbcType=DOUBLE}, 
+      #{encrypt,jdbcType=INTEGER}, #{fareType,jdbcType=VARCHAR}, #{reserved,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOrderCreate">
+    insert into netcar_order_create
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="departTime != null">
+        depart_time,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="passengerNote != null">
+        passenger_note,
+      </if>
+      <if test="departure != null">
+        departure,
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude,
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude,
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude,
+      </if>
+      <if test="encrypt != null">
+        encrypt,
+      </if>
+      <if test="fareType != null">
+        fare_type,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=INTEGER},
+      </if>
+      <if test="departTime != null">
+        #{departTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerNote != null">
+        #{passengerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="depLongitude != null">
+        #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="encrypt != null">
+        #{encrypt,jdbcType=INTEGER},
+      </if>
+      <if test="fareType != null">
+        #{fareType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarOrderCreate">
+    update netcar_order_create
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=INTEGER},
+      </if>
+      <if test="departTime != null">
+        depart_time = #{departTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerNote != null">
+        passenger_note = #{passengerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="depLongitude != null">
+        dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="depLatitude != null">
+        dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="destLongitude != null">
+        dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="destLatitude != null">
+        dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="encrypt != null">
+        encrypt = #{encrypt,jdbcType=INTEGER},
+      </if>
+      <if test="fareType != null">
+        fare_type = #{fareType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarOrderCreate">
+    update netcar_order_create
+    set address = #{address,jdbcType=INTEGER},
+      depart_time = #{departTime,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=VARCHAR},
+      passenger_note = #{passengerNote,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      dep_longitude = #{depLongitude,jdbcType=DOUBLE},
+      dep_latitude = #{depLatitude,jdbcType=DOUBLE},
+      destination = #{destination,jdbcType=VARCHAR},
+      dest_longitude = #{destLongitude,jdbcType=DOUBLE},
+      dest_latitude = #{destLatitude,jdbcType=DOUBLE},
+      encrypt = #{encrypt,jdbcType=INTEGER},
+      fare_type = #{fareType,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+    <!--订单发起-->
+    <select id="queryOrderCreateListByCondition" parameterType="com.zhcx.netcar.params.OrderParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_order_create
+        <where>
+            and company_id in (
+            select
+            company_id
+            from
+            netcar_base_info_company_service
+<!--            where service_no in (select busiRegNumber from yunzheng_base_info_company)-->
+            )
+            <if test="companyId != null">
+                and company_id = #{companyId}
+            </if>
+            <if test="keyword != null">
+                and order_id like concat(#{keyword},'%')
+            </if>
+            <if test="startTime != null and endTime != null">
+                and order_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+
+    <!-- 1小时内订单发起 -->
+    <select id="queryOrderPositionList" parameterType="map" resultMap="BaseResultMap">
+        select
+        company_id, order_id, order_time, dep_longitude/1000000 as dep_longitude, dep_latitude/1000000 as dep_latitude
+        from netcar_order_create
+        <where>
+<!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+            <if test="startTime != null and endTime != null">
+                and order_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

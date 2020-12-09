@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.RoleResRefMapper" >
+  <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.RoleResRef" >
+    <constructor >
+      <idArg column="UUID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="MENU_IDS" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="ROLE_ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="CREATOR" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="WHO_MODIFIED" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="TIME_CREATED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIME_MODIFIED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, MENU_IDS, ROLE_ID, CREATOR, WHO_MODIFIED, TIME_CREATED, TIME_MODIFIED, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_res_ref
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_role_res_ref
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.auth.pojo.RoleResRef" >
+    insert into t_role_res_ref (UUID, MENU_IDS, ROLE_ID, 
+      CREATOR, WHO_MODIFIED, TIME_CREATED, 
+      TIME_MODIFIED, REMARK)
+    values (#{uuid,jdbcType=BIGINT}, #{menuIds,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
+      #{creator,jdbcType=BIGINT}, #{whoModified,jdbcType=BIGINT}, #{timeCreated,jdbcType=VARCHAR}, 
+      #{timeModified,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.auth.pojo.RoleResRef" >
+    insert into t_role_res_ref
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="menuIds != null" >
+        MENU_IDS,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="whoModified != null" >
+        WHO_MODIFIED,
+      </if>
+      <if test="timeCreated != null" >
+        TIME_CREATED,
+      </if>
+      <if test="timeModified != null" >
+        TIME_MODIFIED,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="menuIds != null" >
+        #{menuIds,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="whoModified != null" >
+        #{whoModified,jdbcType=BIGINT},
+      </if>
+      <if test="timeCreated != null" >
+        #{timeCreated,jdbcType=VARCHAR},
+      </if>
+      <if test="timeModified != null" >
+        #{timeModified,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.auth.pojo.RoleResRef" >
+    update t_role_res_ref
+    <set >
+      <if test="menuIds != null" >
+        MENU_IDS = #{menuIds,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        CREATOR = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="whoModified != null" >
+        WHO_MODIFIED = #{whoModified,jdbcType=BIGINT},
+      </if>
+      <if test="timeCreated != null" >
+        TIME_CREATED = #{timeCreated,jdbcType=VARCHAR},
+      </if>
+      <if test="timeModified != null" >
+        TIME_MODIFIED = #{timeModified,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.auth.pojo.RoleResRef" >
+    update t_role_res_ref
+    set MENU_IDS = #{menuIds,jdbcType=BIGINT},
+      ROLE_ID = #{roleId,jdbcType=BIGINT},
+      CREATOR = #{creator,jdbcType=BIGINT},
+      WHO_MODIFIED = #{whoModified,jdbcType=BIGINT},
+      TIME_CREATED = #{timeCreated,jdbcType=VARCHAR},
+      TIME_MODIFIED = #{timeModified,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
+</mapper>

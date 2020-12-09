@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarRatedDriverPunishMapper">
+  <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarRatedDriverPunish">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="license_id" jdbcType="VARCHAR" property="licenseId" />
+    <id column="punish_time" jdbcType="VARCHAR" property="punishTime" />
+    <result column="punish_reason" jdbcType="VARCHAR" property="punishReason" />
+    <result column="punish_result" jdbcType="VARCHAR" property="punishResult" />
+    <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, license_id, punish_time, punish_reason, punish_result, reserved
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from netcar_rated_driver_punish
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+      and punish_time = #{punishTime,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_rated_driver_punish
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+      and punish_time = #{punishTime,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedDriverPunish">
+    insert into netcar_rated_driver_punish (company_id, license_id, punish_time, 
+      punish_reason, punish_result, reserved
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{licenseId,jdbcType=VARCHAR}, #{punishTime,jdbcType=VARCHAR}, 
+      #{punishReason,jdbcType=VARCHAR}, #{punishResult,jdbcType=VARCHAR}, #{reserved,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedDriverPunish">
+    insert into netcar_rated_driver_punish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="licenseId != null">
+        license_id,
+      </if>
+      <if test="punishTime != null">
+        punish_time,
+      </if>
+      <if test="punishReason != null">
+        punish_reason,
+      </if>
+      <if test="punishResult != null">
+        punish_result,
+      </if>
+      <if test="reserved != null">
+        reserved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseId != null">
+        #{licenseId,jdbcType=VARCHAR},
+      </if>
+      <if test="punishTime != null">
+        #{punishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="punishReason != null">
+        #{punishReason,jdbcType=VARCHAR},
+      </if>
+      <if test="punishResult != null">
+        #{punishResult,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        #{reserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedDriverPunish">
+    update netcar_rated_driver_punish
+    <set>
+      <if test="punishReason != null">
+        punish_reason = #{punishReason,jdbcType=VARCHAR},
+      </if>
+      <if test="punishResult != null">
+        punish_result = #{punishResult,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved != null">
+        reserved = #{reserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+      and punish_time = #{punishTime,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarRatedDriverPunish">
+    update netcar_rated_driver_punish
+    set punish_reason = #{punishReason,jdbcType=VARCHAR},
+      punish_result = #{punishResult,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and license_id = #{licenseId,jdbcType=VARCHAR}
+      and punish_time = #{punishTime,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="selectListByKeyword" resultMap="BaseResultMap" parameterType="com.zhcx.netcar.params.RatedDriverParam">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_rated_driver_punish
+        <where>
+<!--            and company_id in (select company_id from netcar_base_info_company_service a,yunzheng_base_info_company b where a.service_no = b.busiRegNumber)-->
+<!--            and license_id in (select cardno from yunzheng_base_info_driver)-->
+            <if test="companyId !=null and companyId != ''">
+                and company_id = #{companyId}
+            </if>
+            <if test="licenseId != null and licenseId != ''">
+                and license_id like concat('%',#{licenseId},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+                and punish_time between date_format(#{startTime},'%Y%m%d%H%i%s')
+                and date_format(#{endTime},'%Y%m%d%H%i%s')
+            </if>
+        </where>
+    </select>
+</mapper>

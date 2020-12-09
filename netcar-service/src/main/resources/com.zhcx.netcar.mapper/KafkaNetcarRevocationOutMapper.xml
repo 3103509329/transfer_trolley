@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.statistical.KafkaNetcarRevocationOutMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.statistical.KafkaNetcarRevocationOut">
+        <id column="ORDERID" jdbcType="VARCHAR" property="orderid"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId"/>
+        <result column="REVOCATION_TYPE" jdbcType="VARCHAR" property="revocationType"/>
+        <result column="TIME" jdbcType="BIGINT" property="time"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ORDERID, ADDRESS, COMPANY_ID, REVOCATION_TYPE, TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from kafka_netcar_revocation_out
+        where ORDERID = #{orderid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kafka_netcar_revocation_out
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarRevocationOut">
+    insert into kafka_netcar_revocation_out (ORDERID, ADDRESS, COMPANY_ID, 
+      REVOCATION_TYPE, TIME)
+    values (#{orderid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{revocationType,jdbcType=VARCHAR}, #{time,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarRevocationOut">
+        insert into kafka_netcar_revocation_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderid != null">
+                ORDERID,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="companyId != null">
+                COMPANY_ID,
+            </if>
+            <if test="revocationType != null">
+                REVOCATION_TYPE,
+            </if>
+            <if test="time != null">
+                TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderid != null">
+                #{orderid,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="revocationType != null">
+                #{revocationType,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarRevocationOut">
+        update kafka_netcar_revocation_out
+        <set>
+            <if test="address != null">
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="revocationType != null">
+                REVOCATION_TYPE = #{revocationType,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                TIME = #{time,jdbcType=BIGINT},
+            </if>
+        </set>
+        where ORDERID = #{orderid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.statistical.KafkaNetcarRevocationOut">
+    update kafka_netcar_revocation_out
+    set ADDRESS = #{address,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      REVOCATION_TYPE = #{revocationType,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=BIGINT}
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </update>
+    <select id="getDriverRevocation" resultMap="BaseResultMap">
+        select COMPANY_ID, ADDRESS, REVOCATION_TYPE, revocation_count,TIME,
+        <if test="dateType = year">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy' ) AS TIME
+        </if>
+        <if test="dateType = month">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM' ) AS TIME
+        </if>
+        <if test="dateType = day">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd' ) AS TIME
+        </if>
+        <if test="dateType = hour">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd HH' ) AS TIME
+        </if>
+        <if test="dateType = hour">
+            TIME_FORMAT( UNIX_TIMESTAMP(TIME), 'yyyy-MM-dd' ) AS TIME
+        </if>
+        from
+        kafka_netcar_revocation_out
+        <where>
+            <if test="dateType = year">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME) ,'yyyy') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME) ,'yyyy') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = month">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = day">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = hour">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd HH') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="dateType = null or dateType = ''">
+                <choose>
+                    <when test="EDate == null or EDate == ''">
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') = #{SDate}
+                    </when>
+                    <otherwise>
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &gt;= #{SDate}
+                        and TIME_FORMAT(UNIX_TIMESTAMP(pay.TIME),'yyyy-MM-dd') &lt;= #{#{EDate}
+                    </otherwise>
+                </choose>
+
+            </if>
+            <if test="join != null and join != ''">
+                and pay.company_id in (#{join})
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

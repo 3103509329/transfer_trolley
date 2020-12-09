@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhcx.netcar.netcarservice.mapper.base.NetcarBaseInfoCompanyPayMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompanyPay">
+        <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+        <result column="pay_name" jdbcType="VARCHAR" property="payName" />
+        <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+        <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+        <result column="pay_scope" jdbcType="VARCHAR" property="payScope" />
+        <result column="prepare_bank" jdbcType="VARCHAR" property="prepareBank" />
+        <result column="count_date" jdbcType="INTEGER" property="countDate" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="flag" jdbcType="INTEGER" property="flag" />
+        <result column="reserved" jdbcType="VARCHAR" property="reserved" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    company_id, update_time, pay_name, pay_id, pay_type, pay_scope, prepare_bank, count_date,
+    state, flag, reserved
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from netcar_base_info_company_pay
+        where company_id = #{companyId,jdbcType=VARCHAR}
+        and update_time = #{updateTime,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from netcar_base_info_company_pay
+    where company_id = #{companyId,jdbcType=VARCHAR}
+      and update_time = #{updateTime,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompanyPay">
+    insert into netcar_base_info_company_pay (company_id, update_time, pay_name,
+      pay_id, pay_type, pay_scope,
+      prepare_bank, count_date, state,
+      flag, reserved)
+    values (#{companyId,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{payName,jdbcType=VARCHAR},
+      #{payId,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{payScope,jdbcType=VARCHAR},
+      #{prepareBank,jdbcType=VARCHAR}, #{countDate,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+      #{flag,jdbcType=INTEGER}, #{reserved,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompanyPay">
+        insert into netcar_base_info_company_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="payName != null">
+                pay_name,
+            </if>
+            <if test="payId != null">
+                pay_id,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="payScope != null">
+                pay_scope,
+            </if>
+            <if test="prepareBank != null">
+                prepare_bank,
+            </if>
+            <if test="countDate != null">
+                count_date,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="reserved != null">
+                reserved,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="payName != null">
+                #{payName,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payScope != null">
+                #{payScope,jdbcType=VARCHAR},
+            </if>
+            <if test="prepareBank != null">
+                #{prepareBank,jdbcType=VARCHAR},
+            </if>
+            <if test="countDate != null">
+                #{countDate,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="reserved != null">
+                #{reserved,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompanyPay">
+        update netcar_base_info_company_pay
+        <set>
+            <if test="payName != null">
+                pay_name = #{payName,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                pay_id = #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payScope != null">
+                pay_scope = #{payScope,jdbcType=VARCHAR},
+            </if>
+            <if test="prepareBank != null">
+                prepare_bank = #{prepareBank,jdbcType=VARCHAR},
+            </if>
+            <if test="countDate != null">
+                count_date = #{countDate,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="reserved != null">
+                reserved = #{reserved,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where company_id = #{companyId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.netcar.pojo.base.NetcarBaseInfoCompanyPay">
+    update netcar_base_info_company_pay
+    set pay_name = #{payName,jdbcType=VARCHAR},
+      pay_id = #{payId,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      pay_scope = #{payScope,jdbcType=VARCHAR},
+      prepare_bank = #{prepareBank,jdbcType=VARCHAR},
+      count_date = #{countDate,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      reserved = #{reserved,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectListByCompanyId" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from netcar_base_info_company_pay
+        <where>
+            <if test="companyId != null">
+                and company_id = #{companyId,jdbcType=VARCHAR}
+            </if>
+<!--            <if test="companyId == null">-->
+<!--                and company_id in (select company_id from netcar_base_info_company_service where service_no in (select busiRegNumber from yunzheng_base_info_company))-->
+<!--            </if>-->
+        </where>
+    </select>
+</mapper>

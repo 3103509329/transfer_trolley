@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhcx.auth.mapper.AuthRoleMapper">
+    <resultMap id="BaseResultMap" type="com.zhcx.auth.pojo.AuthRole">
+        <constructor>
+            <idArg column="uuid" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="role_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="role_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="sys_types" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="creator" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="who_modified" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="time_created" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="time_modified" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="grade" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="str1" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="application_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="role_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="BaseData" type="com.zhcx.auth.pojo.AuthRole">
+        <id column="uuid" property="uuid" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_code" property="roleCode" jdbcType="VARCHAR"/>
+        <result column="sys_types" property="sysTypes" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="who_modified" property="whoModified" jdbcType="VARCHAR"/>
+        <result column="time_created" property="timeCreated" jdbcType="VARCHAR"/>
+        <result column="time_modified" property="timeModified" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="grade" property="grade" jdbcType="CHAR"/>
+        <result column="str1" property="str1" jdbcType="VARCHAR"/>
+        <result column="application_code" property="applicationCode" jdbcType="VARCHAR"/>
+        <result column="role_type" property="roleType" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    uuid, role_name, role_code,sys_types, creator, who_modified, time_created, time_modified, status,
+    grade, str1,application_code,role_type
+  </sql>
+    <select id="selectByPrimaryKey" resultType="com.zhcx.auth.pojo.AuthRole" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_role
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAuthRoleListByParam" resultMap="BaseData"
+            parameterType="com.zhcx.auth.pojo.AuthRole">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_role
+        <where>
+            1=1
+            <if test="uuid != null">
+                and uuid = #{uuid}
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name like CONCAT('%',#{roleName},'%')
+            </if>
+            <if test="applicationCode != null and applicationCode != ''">
+                and application_code = #{applicationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="roleType != null">
+                and role_type = #{roleType,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAuthRoleByParam" resultType="com.zhcx.auth.pojo.AuthRole"
+            parameterType="com.zhcx.auth.pojo.AuthRole">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_role
+        <where>
+            1=1
+            <if test="uuid != null">
+                and uuid = #{uuid,jdbcType=BIGINT}
+            </if>
+            <if test="roleName != null and roleName != '' or roleCode != null and roleCode != ''">
+                and (role_name = #{roleName,jdbcType=VARCHAR} or role_code = #{roleCode,jdbcType=VARCHAR} )
+            </if>
+
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_auth_role
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.zhcx.auth.pojo.AuthRole">
+    insert into t_auth_role (uuid, role_name, role_code, sys_types,
+      creator, who_modified, time_created,
+      time_modified, status, grade,
+      str1,application_code,role_type)
+    values (#{uuid,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR},  #{sysTypes,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{whoModified,jdbcType=VARCHAR}, #{timeCreated,jdbcType=VARCHAR},
+      #{timeModified,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{grade,jdbcType=CHAR},
+      #{str1,jdbcType=VARCHAR},#{applicationCode,jdbcType=VARCHAR},#{roleType,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhcx.auth.pojo.AuthRole">
+        insert into t_auth_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="roleCode != null">
+                role_code,
+            </if>
+            <if test="sysTypes != null">
+                sys_types,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="whoModified != null">
+                who_modified,
+            </if>
+            <if test="timeCreated != null">
+                time_created,
+            </if>
+            <if test="timeModified != null">
+                time_modified,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="str1 != null">
+                str1,
+            </if>
+            <if test="applicationCode != null">
+                application_code,
+            </if>
+            <if test="roleType != null">
+                role_type
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=BIGINT},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sysTypes != null">
+                #{sysTypes,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="whoModified != null">
+                #{whoModified,jdbcType=VARCHAR},
+            </if>
+            <if test="timeCreated != null">
+                #{timeCreated,jdbcType=VARCHAR},
+            </if>
+            <if test="timeModified != null">
+                #{timeModified,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=CHAR},
+            </if>
+            <if test="str1 != null">
+                #{str1,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationCode != null">
+                #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleType != null">
+                #{roleType,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhcx.auth.pojo.AuthRole">
+        update t_auth_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                role_code = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sysTypes != null">
+                sys_types = #{sysTypes,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="whoModified != null">
+                who_modified = #{whoModified,jdbcType=VARCHAR},
+            </if>
+            <if test="timeCreated != null">
+                time_created = #{timeCreated,jdbcType=VARCHAR},
+            </if>
+            <if test="timeModified != null">
+                time_modified = #{timeModified,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=CHAR},
+            </if>
+            <if test="str1 != null">
+                str1 = #{str1,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationCode != null">
+                application_code = #{applicationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleType != null">
+                role_type = #{roleType,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhcx.auth.pojo.AuthRole">
+    update t_auth_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      sys_types = #{sysTypes,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      who_modified = #{whoModified,jdbcType=VARCHAR},
+      time_created = #{timeCreated,jdbcType=VARCHAR},
+      time_modified = #{timeModified,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      grade = #{grade,jdbcType=CHAR},
+      str1 = #{str1,jdbcType=VARCHAR},
+      application_code = #{applicationCode,jdbcType=VARCHAR},
+      role_type =  #{roleType,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+    <select id="selectByApplication" resultMap="BaseData"
+            parameterType="com.zhcx.auth.pojo.ApplicationRoleBaseInfo">
+        select
+        role.uuid, role.role_name, role.role_code,role.sys_types, role.creator, role.who_modified, role.time_created, role.time_modified, role.status,
+        role.grade, role.str1,role.application_code,role.role_type
+        from t_auth_role as role
+        where
+        role.uuid = (select user.role_id from t_auth_user_role as user where user.user_id = #{userId,jdbcType=BIGINT})
+        and role.application_code = #{applicationCode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectApplicationAndRole" resultType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO"
+            parameterType="com.zhcx.auth.vo.ApplicationRoleBaseInfoVO">
+        select
+        a.code as applicationCode,
+        a.name as applicationName,
+        r.uuid as roleId,
+        r.role_type as roleType,
+        r.role_name as roleName
+        FROM
+        t_auth_application as a
+        left JOIN t_auth_role as r on r.application_code = a.code
+        <where>
+            1=1
+            and
+            r.status =1
+            and
+            a.status = 1
+            <if test="userId != null">
+                <!--                    当用户未企业类型时，只获取该企业所对应的应用下的企业角色-->
+                and r.application_code in (select t.application_code from t_auth_application_user t where t.user_id =
+                #{userId})
+            </if>
+            <if test="uuid != null">
+                and r.uuid in (select t2.role_id from t_auth_user_role t2 where t2.user_id = #{uuid})
+            </if>
+        </where>
+    </select>
+    <select id="selectByUserIdAndCode" resultMap="BaseData">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_role
+        <where>
+            1=1
+            <if test="userId != null">
+                and uuid in (select role_id from t_auth_user_role where user_id = #{userId,jdbcType=BIGINT})
+            </if>
+            <if test="applicationCode != null and applicationCode != ''">
+                and application_code = #{applicationCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+
+</mapper>

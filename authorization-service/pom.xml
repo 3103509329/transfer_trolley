@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.zhcx.authorization</groupId>
+	<artifactId>authorization-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>authorization-service</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<com.github.pagehelper.version>1.2.0</com.github.pagehelper.version>
+        <skipTests>true</skipTests>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.zhcx.monitor</groupId>
+			<artifactId>region-monitor-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+            <groupId>com.zhcx.netcar</groupId>
+            <artifactId>netcar-basic-data-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+            <groupId>com.zhcx.spring.boot</groupId>
+            <artifactId>spring-boot-integrated-starter</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.csource</groupId>
+					<artifactId>fastdfs-client</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		
+		<dependency>
+     		<groupId>com.zhcx.basicdata</groupId>
+      		<artifactId>basic-data-interface</artifactId>
+      		<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+<!-- 		<dependency>
+     		<groupId>com.zhcx.network</groupId>
+      		<artifactId>taxi-network-interface</artifactId>
+      		<version>0.0.1-SNAPSHOT</version>
+		</dependency> -->
+		<!-- xss过滤组件 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+		<!--okhttp3-->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+
+		<dependency>
+     		<groupId>com.zhcx.auth</groupId>
+      		<artifactId>auth-base-interface</artifactId>
+      		<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+
+		<!-- Spring Boot Mybatis 依赖 -->  
+        <dependency>  
+            <groupId>org.mybatis.spring.boot</groupId>  
+            <artifactId>mybatis-spring-boot-starter</artifactId>  
+            <version>1.2.0</version>  
+        </dependency>  
+        <!-- 分页 -->  
+       <!--  <dependency>  
+            <groupId>com.github.pagehelper</groupId>  
+            <artifactId>pagehelper</artifactId>  
+            <version>4.0.0</version>  
+        </dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+        
+        <!--httpclient -->  
+        <dependency>  
+            <groupId>org.apache.httpcomponents</groupId>  
+            <artifactId>httpclient</artifactId>  
+        </dependency>  
+  
+        <dependency>  
+            <groupId>commons-io</groupId>  
+            <artifactId>commons-io</artifactId>  
+            <version>2.4</version>  
+        </dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+        
+        <dependency>  
+            <groupId>cglib</groupId>  
+            <artifactId>cglib</artifactId>  
+            <version>2.2.2</version>  
+        </dependency>  
+  
+        <dependency>  
+            <groupId>com.alibaba</groupId>  
+            <artifactId>fastjson</artifactId>  
+            <version>1.1.41</version>  
+        </dependency> 
+        
+        <dependency>
+		    <groupId>org.mybatis.generator</groupId>
+		    <artifactId>mybatis-generator-core</artifactId>
+		    <!-- 注意版本.这里我使用的是1.3.2 -->
+		    <version>1.3.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>18.0</version>
+		</dependency>
+		
+			<!--分页插件 -->
+ 		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>${com.github.pagehelper.version}</version>
+		</dependency> 
+	
+				<!-- 外部接口文档引用jar -->
+		<dependency>
+   			 <groupId>org.projectlombok</groupId>
+   			 <artifactId>lombok</artifactId>
+  			 <version>1.16.4</version>
+		</dependency>
+		
+				<!-- swagger-mvc -->  
+		 <dependency>
+		      <groupId>io.springfox</groupId>
+		      <artifactId>springfox-swagger2</artifactId>
+		      <version>2.5.0</version>
+		 </dependency>
+
+		  <dependency>
+		      <groupId>io.springfox</groupId>
+		      <artifactId>springfox-swagger-ui</artifactId>
+		      <version>2.5.0</version>
+		  </dependency>
+		  
+		  		<!-- 其他常用包 begin -->
+		<dependency>
+			<groupId>commons-attributes</groupId>
+			<artifactId>commons-attributes-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-attributes</groupId>
+			<artifactId>commons-attributes-compiler</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>net.sf.json-lib</groupId>-->
+			<!--<artifactId>json-lib</artifactId>-->
+			<!--<version>2.4</version>-->
+			<!--<classifier>jdk15</classifier>-->
+		<!--</dependency>-->
+		<!-- 其他常用包 end' -->
+		
+		<!--socketIo-->
+		<dependency>
+        	<groupId>com.corundumstudio.socketio</groupId>
+		    <artifactId>netty-socketio</artifactId>
+		    <version>1.7.12</version>
+		</dependency>
+			
+		<dependency>
+		    <groupId>org.bouncycastle</groupId>
+		    <artifactId>bcprov-jdk15on</artifactId>
+		    <version>1.51</version> 
+		</dependency>
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+			<groupId>in.zapr.druid</groupId>
+			<artifactId>druidry</artifactId>
+			<version>2.10-SNAPSHOT</version>
+		</dependency>
+        <!--nifi服务状态监控-->
+        <dependency>
+            <groupId>com.zhcx.netcar</groupId>
+            <artifactId>nifi-api-client-java</artifactId>
+            <!-- 测试环境 -->
+            <!--<version>1.0.0</version>-->
+            <!--益阳生产环境-->
+            <version>2.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+		<!-- geometry 位置服务-->
+		<dependency>
+			<groupId>com.esri.geometry</groupId>
+			<artifactId>esri-geometry-api</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.geographiclib</groupId>
+			<artifactId>GeographicLib-Java</artifactId>
+			<version>1.48</version>
+		</dependency>
+		<!-- poi -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<!-- rar文件处理jar -->
+		<dependency>
+			<groupId>com.github.junrar</groupId>
+			<artifactId>junrar</artifactId>
+			<version>0.7</version>
+		</dependency>
+        <dependency>
+            <groupId>com.zhcx.platformToNet</groupId>
+            <artifactId>platformtonet-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>com.zhcx.spring.boot</groupId>
+		    <artifactId>spring-boot-job-starter</artifactId>
+		    <version>1.0.0-SNAPSHOT</version>
+		</dependency>	
+
+		<!--图片压缩工具类-->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+
+</project>
